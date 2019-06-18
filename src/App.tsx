@@ -17,7 +17,7 @@ export class App extends React.Component {
         return (
             <BrowserRouter>
                 <AppContainer className="App">
-                    <Loading loading={true}/>
+                    <Loading loading={false}/>
                     <Sidebar />
                 </AppContainer>
             </BrowserRouter>

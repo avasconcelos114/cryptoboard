@@ -29,4 +29,3 @@
 * Routing
 * Redux
 * Containerization
-* Utilize breakpoints in styling
