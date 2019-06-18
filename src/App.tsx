@@ -1,19 +1,26 @@
 import React from 'react';
-import Loading from './components/loading';
+import {BrowserRouter} from "react-router-dom";
 import styled from 'styled-components';
-import './App.css'
 
-const AppContainer = styled.div`
-    height: 100%;
-    width: 100%;
-`;
+import Sidebar from './containers/sidebar';
+import Loading from './components/loading';
+import './App.css';
 
 export class App extends React.Component {
     render() {
+        const AppContainer = styled.div`
+            height: 100%;
+            width: 100%;
+            display: flex;
+        `;
+
         return (
-            <AppContainer className="App">
-                <Loading loading={true}/>
-            </AppContainer>
+            <BrowserRouter>
+                <AppContainer className="App">
+                    <Loading loading={true}/>
+                    <Sidebar />
+                </AppContainer>
+            </BrowserRouter>
         );
     }
 }
