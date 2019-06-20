@@ -1,13 +1,16 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
+import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import styled from 'styled-components';
 
+import './App.css';
 import store from './store';
+
 import Sidebar from './components/sidebar';
 import Header from './components/header';
 import Loading from './components/loading';
-import './App.css';
+import News from './components/news';
+import NotFound from './components/notFound';
 
 export class App extends React.Component {
     render() {
@@ -24,6 +27,7 @@ export class App extends React.Component {
             display: flex;
             flex-direction: column;
         `;
+
         return (
             <BrowserRouter>
                 <Provider store={store}>
@@ -32,6 +36,10 @@ export class App extends React.Component {
                         <Sidebar />
                         <MainViewContainer>
                             <Header />
+                            <Switch>
+                                <Route path="/news" component={News}/>
+                                <Route component={NotFound}/>
+                            </Switch>
                         </MainViewContainer>
                     </AppContainer>
                 </Provider>

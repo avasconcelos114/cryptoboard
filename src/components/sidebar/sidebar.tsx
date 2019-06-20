@@ -40,8 +40,9 @@ export class Sidebar extends React.PureComponent<Props> {
 
         const MobileSidebar = styled.div`
             background: ${theme.sidebar_background};
-            height: 100%;
+            height: calc(100% - 80px);
             width: 100%;
+            padding-top: 80px;
             position: absolute;
             overflow: hidden;
             display: none;

@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import {Link} from 'react-router-dom';
+import breakpoint from 'styled-components-breakpoint';
+
 import {Menu, Theme} from '../../constants/types';
 
 interface Props {
@@ -23,6 +26,21 @@ export class MenuList extends React.PureComponent<Props> {
             margin: 30px 15px;
             display: flex;
             align-items: center;
+
+            a {
+                text-decoration: none;
+                font-size: 1.2rem;
+                color: ${theme.sidebar_font_color};
+            }
+    
+            ${breakpoint('mobile')`
+                justify-content: center;
+            `}
+
+            ${breakpoint('tablet')`
+                justify-content: flex-start;
+            `}
+            
         `;
         const MenuImage = styled.img`
             width: 60px;
@@ -30,18 +48,11 @@ export class MenuList extends React.PureComponent<Props> {
             margin-right: 20px;
         `;
 
-        const MenuLink = styled.a`
-            text-decoration: none;
-            font-size: 1.2rem;
-            color: ${theme.sidebar_font_color};
-
-        `;
-
         menus.forEach((menu) => {
             menuElements.push(
-                <MenuItem>
+                <MenuItem key={menu.route}>
                     <MenuImage src={`/assets/img/${menu.route}_icon.png`}/>
-                    <MenuLink href={`/${menu.route}`}>{menu.title}</MenuLink>
+                    <Link to={`/${menu.route}`}>{menu.title}</Link>
                 </MenuItem>
             );
         })
