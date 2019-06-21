@@ -11,3 +11,12 @@ export interface Menu {
     title: string,
     route: string,
 }
+
+export interface News {
+    id: string,
+    title: string,
+    imageurl: string,
+    tags: string,
+    upvotes: string,
+    downvotes: string,
+}

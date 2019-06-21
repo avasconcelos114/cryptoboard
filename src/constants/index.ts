@@ -1,3 +1,8 @@
+export const api = {
+    token: '328615ca08e935e05a0ddd27d5c746093b35cb0387ecb5b64ff29bc7e63094cb',
+    endpoint: 'https://min-api.cryptocompare.com'
+}
+
 export const themes = {
     dark: {
         base_font_color: '#FFFFFF',

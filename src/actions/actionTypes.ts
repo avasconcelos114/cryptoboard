@@ -1,1 +1,1 @@
-export const GET_MENU_ITEMS = 'GET_MENU_ITEMS';
+export const FETCH_NEWS = 'FETCH_NEWS';

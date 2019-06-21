@@ -1,13 +1,25 @@
 import {connect} from 'react-redux';
+import {bindActionCreators} from 'redux';
 
+import {fetchNews} from '../../actions/news'
 import News from './news';
 import selector from '../../selectors';
 
 function mapStateToProps(state) {
     const theme = selector.getTheme(state)
+    const newsList = selector.getNews(state)
     return {
         theme,
+        newsList
     };
 }
 
-export default connect(mapStateToProps)(News);
+function mapDispatchToProps(dispatch) {
+    return {
+        actions: bindActionCreators({
+            fetchNews
+        }, dispatch),
+    };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(News);

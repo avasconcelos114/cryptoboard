@@ -1,16 +1,23 @@
 import React from 'react';
 import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
-import {Theme} from '../../constants/types';
+import {Theme, News} from '../../constants/types';
 
 interface Props {
     theme: Theme,
+    newsList: News[],
+    actions: any,
 }
 
-export class News extends React.Component<Props> {
+export class NewsPage extends React.Component<Props> {
+
+    componentDidMount() { 
+        this.props.actions.fetchNews()
+    }
 
     render() {
-        const {theme} = this.props;
+        const {theme, newsList} = this.props;
+        const newsElements: any[] = [];
         const Container = styled.div`
             height: 100%;
             width: 100%;
@@ -18,12 +25,25 @@ export class News extends React.Component<Props> {
             flex-direction: column;
         `;
 
+        const Title = styled.h1`
+            margin: 50px 0px 0px 50px;
+            font-size: 3rem;
+        `;
+
+        newsList.forEach((news) => {
+            newsElements.push(
+                <div>{news.title}</div>
+            )
+        })
+
+        console.log(this.props.newsList)
         return (
             <Container>
-                NEWS! :D
+                <Title>{'News'}</Title>
+                {newsElements}
             </Container>
         );
     }
 }
 
-export default News ;
+export default NewsPage;
