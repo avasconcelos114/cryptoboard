@@ -24,9 +24,7 @@ export class Sidebar extends React.PureComponent<Props> {
             z-index: 8;
             width: 270px;
 
-            -webkit-box-shadow: 17px 7px 17px -5px ${theme.drop_shadow};
-            -moz-box-shadow: 17px 7px 17px -5px ${theme.drop_shadow};
-            box-shadow: 17px 7px 17px -5px ${theme.drop_shadow};
+            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 
             ${breakpoint('mobile')`
                 display: none;
@@ -40,9 +38,9 @@ export class Sidebar extends React.PureComponent<Props> {
 
         const MobileSidebar = styled.div`
             background: ${theme.sidebar_background};
-            height: calc(100% - 80px);
+            height: calc(100% - 60px);
             width: 100%;
-            padding-top: 80px;
+            margin-top: 60px;
             position: absolute;
             overflow: hidden;
             display: none;
@@ -51,6 +49,7 @@ export class Sidebar extends React.PureComponent<Props> {
             ${breakpoint('mobile')`
                 display: flex;
                 flex-direction: column;
+                z-index: 6;
                 width: 0px;
             `}
 

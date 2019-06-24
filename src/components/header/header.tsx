@@ -37,22 +37,43 @@ export class Header extends React.Component<Props, State> {
     render() {
         const {theme} = this.props;
         const HeaderContainer = styled.div`
-            height: 60px;
             width: 100%;
             display: flex;
             align-items: center;
-            z-index: 8;
+            z-index: 7;
             flex-direction: row;
-            -webkit-box-shadow: 5px 18px 17px -5px ${theme.drop_shadow};
-            -moz-box-shadow: 5px 18px 17px -5px ${theme.drop_shadow};
-            box-shadow: 5px 18px 17px -5px ${theme.drop_shadow};
+            
+            ${breakpoint('mobile')`
+                height: 60px;
+                background: ${theme.header_background};
+                box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            `}
+                
+            ${breakpoint('tablet')`
+                height: 0px;
+                background: ${theme.main_background};
+                box-shadow: none;
+            `}
+        `;
 
-            background: ${theme.header_background};
+        const HeaderTitle = styled.h2`
+            height: 60px;
+            margin: 0px 20px;
+            align-items: center;
+
+            ${breakpoint('mobile')`
+                display: flex;
+            `}
+                
+            ${breakpoint('tablet')`
+                display: none;
+            `}
         `;
 
         const HamburgerMenu = styled.button`
             z-index: 3;
             position: absolute;
+            right: 0;
             cursor: pointer;
             background: url(/assets/img/hamburger_icon.png);
             background-size: contain;
@@ -60,7 +81,7 @@ export class Header extends React.Component<Props, State> {
             border: none;
             width: 30px;
             height: 20px;
-            margin-left: 20px;
+            margin-right: 20px;
 
             ${breakpoint('mobile')`
                 display: flex;
@@ -73,6 +94,7 @@ export class Header extends React.Component<Props, State> {
 
         return (
             <HeaderContainer>
+                <HeaderTitle>{'Cryptoboard'}</HeaderTitle>
                 <HamburgerMenu onClick={this.toggleSidebar}/>
             </HeaderContainer>
         );

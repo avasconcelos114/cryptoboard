@@ -9,10 +9,15 @@ import store from './store';
 import Sidebar from './components/sidebar';
 import Header from './components/header';
 import Loading from './components/loading';
+
+import Dashboard from './components/dashboard';
+import TopList from './components/topList';
+import CoinList from './components/coinList';
 import News from './components/news';
 import NotFound from './components/notFound';
 
 export class App extends React.Component {
+
     render() {
         const AppContainer = styled.div`
             height: 100%;
@@ -32,11 +37,14 @@ export class App extends React.Component {
             <BrowserRouter>
                 <Provider store={store}>
                     <AppContainer className="App">
-                        <Loading loading={false}/>
+                        <Loading />
                         <Sidebar />
                         <MainViewContainer>
                             <Header />
                             <Switch>
+                                <Route path="/dashboard" component={Dashboard}/>
+                                <Route path="/top_coins" component={TopList}/>
+                                <Route path="/all_coins" component={CoinList}/>
                                 <Route path="/news" component={News}/>
                                 <Route component={NotFound}/>
                             </Switch>

@@ -1,19 +1,33 @@
 import React from 'react';
 import styled from 'styled-components';
 import Zdog from 'zdog';
-import Constants from '../constants';
+import {Theme} from '../../constants/types';
 
 type Props = {
-    loading: boolean
+    isLoading: boolean,
+    theme: Theme
 }
 
-const activeTheme = 'dark'
-const theme = Constants.themes[activeTheme]
 let illo: any;
 
 export class Loading extends React.Component<Props> {
     componentDidMount() {
+        this.drawAnimation()
+        
+    }
+
+    componentWillReceiveProps(nextProps: any) {
+        if (nextProps.isLoading) {
+            this.drawAnimation()
+        }
+    }
+
+    drawAnimation = () => {
         const zoom = 6;
+        if (document.querySelector('.zdog-svg') === null) {
+            return
+        }
+
         illo = new Zdog.Illustration({
             element: '.zdog-svg',
             zoom,
@@ -66,7 +80,6 @@ export class Loading extends React.Component<Props> {
             fill: true,
             stroke: 1/zoom,
             closed: false,
-            // visible: false,
         });
         // nub
         new Zdog.Cylinder({
@@ -99,12 +112,10 @@ export class Loading extends React.Component<Props> {
                 fill: true,
                 stroke: 1/zoom,
             });
-
         });
-        
         this.animate();
     }
-    
+
     animate = () => {
         illo.rotate.y += 0.009;
         illo.updateRenderGraph();
@@ -112,12 +123,14 @@ export class Loading extends React.Component<Props> {
     }
 
     render() {
+        const {theme, isLoading} = this.props;
         const LoadingContainer = styled.div`
             height: 100%;
             width: 100%;
             position: absolute;
+            overflow: hidden;
             z-index: 10;
-            display: ${this.props.loading ? 'flex' : 'none'};
+            display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
@@ -126,18 +139,23 @@ export class Loading extends React.Component<Props> {
         
         const LoadingSvg = styled.svg`
             display: flex;
+            z-index: 11;
         `;
 
         const LoadingMessage = styled.h1`
             color: ${theme.base_font_color};
             letter-spacing: 1.7px;
         `;
-        return (
-            <LoadingContainer>
-                <LoadingSvg className="zdog-svg" width="240" height="240"></LoadingSvg>
-                <LoadingMessage>Loading</LoadingMessage>
-            </LoadingContainer>
-        )
+
+        if (isLoading) {
+            return (
+                <LoadingContainer>
+                    <LoadingSvg className="zdog-svg" width="240" height="240"></LoadingSvg>
+                    <LoadingMessage>Loading</LoadingMessage>
+                </LoadingContainer>
+            )
+        }
+        return null
     }
 }
 

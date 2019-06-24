@@ -12,11 +12,13 @@
   * React
   * Redux
   * Typescript
+  * Virtualized Lists
 * Styling
   * CSS-in-JS (with styled-components)
   * Responsive layouts (breakpoints)
   * Dynamic themes
   * Animations (with zdog)
+  * Server-side Rendering
 * Dev Env
   * Docker
   * ESLint

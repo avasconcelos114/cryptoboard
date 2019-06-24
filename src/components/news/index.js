@@ -2,7 +2,8 @@ import {connect} from 'react-redux';
 import {bindActionCreators} from 'redux';
 
 import {fetchNews} from '../../actions/news'
-import News from './news';
+import {openLoadingScreen, closeLoadingScreen} from '../../actions/common'
+import NewsList from './newsList';
 import selector from '../../selectors';
 
 function mapStateToProps(state) {
@@ -17,9 +18,11 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators({
-            fetchNews
+            fetchNews,
+            openLoadingScreen,
+            closeLoadingScreen,
         }, dispatch),
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(News);
+export default connect(mapStateToProps, mapDispatchToProps)(NewsList);

@@ -13,3 +13,7 @@ export const getTheme = (store: Store) => {
 export const getLoadingState = (store: Store) => {
     return store.common.isLoading;
 }
+
+export const getSidebarState = (store: Store) => {
+    return store.common.isSidebarOpen;
+}
