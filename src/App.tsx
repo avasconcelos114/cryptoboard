@@ -3,7 +3,6 @@ import {BrowserRouter, Switch, Route} from 'react-router-dom';
 import {Provider} from 'react-redux';
 import styled from 'styled-components';
 
-import './App.css';
 import store from './store';
 
 import Sidebar from './components/sidebar';
@@ -42,6 +41,7 @@ export class App extends React.Component {
                         <MainViewContainer>
                             <Header />
                             <Switch>
+                                <Route exact path="/" component={Dashboard}/>
                                 <Route path="/dashboard" component={Dashboard}/>
                                 <Route path="/top_coins" component={TopList}/>
                                 <Route path="/all_coins" component={CoinList}/>

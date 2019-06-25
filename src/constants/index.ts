@@ -11,14 +11,16 @@ export const api = {
 
 export const themes = {
     dark: {
-        base_font_color: '#FFFFFF',
+        base_font_color: 'rgba(255, 255, 255, 0.87)',
+        medium_font_color: 'rgba(255, 255, 255, 0.60)',
+        disabled_font_color: 'rgba(255, 255, 255, 0.38)',
         drop_shadow: 'rgba(214,214,214,0.8)',
         drop_shadow_hover: 'rgba(214,214,214,1)',
         header_background: '#37474F',
         loading_background: '#1A237E',
-        main_background: '#FAFAFA',
-        news_background: '#FFFFFF',
-        news_category_line: '#E0E0E0',
+        main_background: '#121212',
+        card_background: '#FFFFFF',
+        card_line_color: '#E0E0E0',
         news_category_backgrounds: [
             '#03A9F4',
             '#26C6DA',
@@ -33,14 +35,16 @@ export const themes = {
         sidebar_font_color: '#FFFFFF',
     },
     light: {
-        base_font_color: '#000000',
+        base_font_color: 'rgba(0, 0, 0, 0.87)',
+        medium_font_color: 'rgba(0, 0, 0, 0.60)',
+        disabled_font_color: 'rgba(0, 0, 0, 0.38)',
         drop_shadow: 'rgba(214,214,214,0.4)',
         drop_shadow_hover: 'rgba(214,214,214,0.6)',
         header_background: '#FFFFFF',
         loading_background: '#FAFAFA',
         main_background: '#FAFAFA',
-        news_background: '#FFFFFF',
-        news_category_line: '#E0E0E0',
+        card_background: '#FFFFFF',
+        card_line_color: '#E0E0E0',
         news_category_backgrounds: [
             '#03A9F4',
             '#26C6DA',
@@ -59,7 +63,7 @@ export const themes = {
 export const menuItems = [
     {title: 'Dashboard', route: 'dashboard'},
     {title: 'Top List', route: 'top_coins'},
-    {title: 'All Coins', route: 'all_coins'},
+    // {title: 'All Coins', route: 'all_coins'},
     {title: 'News', route: 'news'},
 ]
 

@@ -16,20 +16,18 @@ export class Loading extends React.Component<Props> {
         
     }
 
-    componentWillReceiveProps(nextProps: any) {
-        if (nextProps.isLoading) {
-            this.drawAnimation()
-        }
+    componentDidUpdate() {
+        this.drawAnimation()
     }
 
     drawAnimation = () => {
         const zoom = 6;
-        if (document.querySelector('.zdog-svg') === null) {
+        if (document.querySelector('.zdog-canvas') === null) {
             return
         }
 
         illo = new Zdog.Illustration({
-            element: '.zdog-svg',
+            element: '.zdog-canvas',
             zoom,
             rotate: { x: -0.4 }
         });
@@ -39,8 +37,8 @@ export class Loading extends React.Component<Props> {
         // -- illustration shapes --- //
 
         const teeth = 8;
-        const frontZ = { z: 3 };
-        const backZ = { z: -3 };
+        const frontZ = {z: 3};
+        const backZ = {z: -3};
 
         const colorA = '#EA0';
         const colorB = '#345';
@@ -137,7 +135,7 @@ export class Loading extends React.Component<Props> {
             background: ${theme.loading_background}
         `;
         
-        const LoadingSvg = styled.svg`
+        const LoadingCanvas = styled.canvas`
             display: flex;
             z-index: 11;
         `;
@@ -150,7 +148,7 @@ export class Loading extends React.Component<Props> {
         if (isLoading) {
             return (
                 <LoadingContainer>
-                    <LoadingSvg className="zdog-svg" width="240" height="240"></LoadingSvg>
+                    <LoadingCanvas className="zdog-canvas" width="240" height="240"></LoadingCanvas>
                     <LoadingMessage>Loading</LoadingMessage>
                 </LoadingContainer>
             )

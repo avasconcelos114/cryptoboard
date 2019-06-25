@@ -22,7 +22,6 @@ export default function(state: object = initialState, action: any) {
             isSidebarOpen: false,
         }
     case CommonActionTypes.TOGGLE_LOADING_OPEN:
-        console.log('TOGGLE_LOADING_OPEN')
         return {
             ...state,
             isLoading: true,

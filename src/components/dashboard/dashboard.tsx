@@ -18,9 +18,22 @@ export class Dashboard extends React.Component<Props> {
             background: ${theme.main_background};
         `;
 
+        const TitleContainer = styled.div`
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+        `;
+
+        const Title = styled.h1`
+            margin: 50px 0px 0px 50px;
+            font-size: 3rem;
+        `;
+
         return (
             <Container>
-                Dashboard!
+                <TitleContainer>
+                    <Title>{'Dashboard'}</Title>
+                </TitleContainer>
             </Container>
         );
     }

@@ -8,3 +8,7 @@ export enum CommonActionTypes {
     TOGGLE_LOADING_OPEN = 'TOGGLE_LOADING_OPEN',
     TOGGLE_LOADING_CLOSED = 'TOGGLE_LOADING_CLOSED',
 }
+
+export enum topListActionTypes {
+    FETCH_TOP_LIST = 'FETCH_TOP_LIST',
+}

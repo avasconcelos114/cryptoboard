@@ -31,7 +31,6 @@ export class NewsCard extends React.Component<Props> {
         const {theme, news} = this.props;
         const categories = news.categories.split('|');
         const categoryElements: any[] = [];
-
         const Container = styled.div`
             height: 350px;
             margin: 10px;
@@ -44,17 +43,14 @@ export class NewsCard extends React.Component<Props> {
             `}
 
             ${breakpoint('tablet')`
-                width: 300px;
+                width: calc(50% - 20px);
+            `}
+
+            ${breakpoint('desktop')`
+                width: calc(25% - 20px);
             `}
         `;
         
-        // -webkit-box-shadow: 17px 7px 17px -5px ${theme.drop_shadow};
-        // -moz-box-shadow: 17px 7px 17px -5px ${theme.drop_shadow};
-        // box-shadow: 17px 7px 17px -5px ${theme.drop_shadow};
-
-        // -webkit-box-shadow: 19px 15px 17px -5px ${theme.drop_shadow_hover};
-        // -moz-box-shadow: 19px 15px 17px -5px ${theme.drop_shadow_hover};
-        // box-shadow: 19px 15px 17px -5px ${theme.drop_shadow_hover};
         const Card = styled.div`
             display: flex;
             overflow: hidden;
@@ -63,7 +59,7 @@ export class NewsCard extends React.Component<Props> {
             background: #fff;
             flex-direction: column;
             border-radius: 4px;
-            background: ${theme.news_background};
+            background: ${theme.card_background};
             box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
             transition: all 0.3s cubic-bezier(.25,.8,.25,1);
             cursor: pointer;
@@ -80,8 +76,16 @@ export class NewsCard extends React.Component<Props> {
         
         const Title = styled.p`
             font-size: 1.4rem;
-            display: flex;
+            line-height: 1.3;
+            font-weight: 300;
+            display: block;
+            display: -webkit-box;
+            -webkit-line-clamp: 4;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            text-overflow: ellipsis;
             min-height: 120px;
+            height: 120px;
             max-height: 120px;
             margin: 0px;         
         `;
@@ -92,6 +96,7 @@ export class NewsCard extends React.Component<Props> {
             min-height: 150px;
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
+            background-color: #EFEFEF;
             background-repeat: no-repeat;
             background-size: cover;
             background-position: center;
@@ -100,7 +105,7 @@ export class NewsCard extends React.Component<Props> {
 
         const CategoriesContainer = styled.div`
             width: calc(100% - 20px);
-            border-top: 1px solid ${theme.news_category_line};
+            border-top: 1px solid ${theme.card_line_color};
             padding: 10px;
             display: flex;
             flex-direction: row;
