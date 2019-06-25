@@ -1,5 +1,6 @@
 {
   "name": "cryptoboard",
+  "homepage" : "http://avasconcelos114.github.io/cryptoboard",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
