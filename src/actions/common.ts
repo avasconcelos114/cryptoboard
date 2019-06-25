@@ -18,6 +18,10 @@ interface CloseLoadingAction {
     type: CommonActionTypes.TOGGLE_LOADING_CLOSED
 }
 
+interface ToggleThemeAction {
+  type: CommonActionTypes.TOGGLE_THEME
+}
+
 export const openSidebar: ActionCreator<
   ThunkAction<Promise<any>, null, null, OpenSidebarAction>
 > = () => {
@@ -54,6 +58,17 @@ export const closeLoadingScreen: ActionCreator<
   return async (dispatch: Dispatch) => {
     dispatch({
         type: CommonActionTypes.TOGGLE_LOADING_CLOSED
+    })
+  };
+};
+
+export const toggleTheme: ActionCreator<
+  ThunkAction<Promise<any>, null, null, ToggleThemeAction>
+> = (theme: string) => {
+  return async (dispatch: Dispatch) => {
+    dispatch({
+        type: CommonActionTypes.TOGGLE_THEME,
+        theme,
     })
   };
 };

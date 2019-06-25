@@ -11,11 +11,17 @@ export class Dashboard extends React.Component<Props> {
     render() {
         const {theme} = this.props
         const Container = styled.div`
-            height: calc(100% - 60px);
             width: 100%;
             display: flex;
             flex-direction: column;
-            background: ${theme.main_background};
+
+            ${breakpoint('mobile')`
+                height: calc(100% - 60px);
+            `}
+
+            ${breakpoint('tablet')`
+                height: 100%;
+            `}
         `;
 
         const TitleContainer = styled.div`
@@ -27,6 +33,7 @@ export class Dashboard extends React.Component<Props> {
         const Title = styled.h1`
             margin: 50px 0px 0px 50px;
             font-size: 3rem;
+            color: ${theme.base_font_color}
         `;
 
         return (

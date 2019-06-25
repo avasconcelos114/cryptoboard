@@ -30,7 +30,7 @@ export class MenuList extends React.PureComponent<Props> {
             a {
                 text-decoration: none;
                 font-size: 1.2rem;
-                color: ${theme.sidebar_font_color};
+                color: ${theme.base_font_color};
             }
     
             ${breakpoint('mobile')`

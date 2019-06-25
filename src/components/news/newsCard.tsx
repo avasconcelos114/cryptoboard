@@ -76,6 +76,7 @@ export class NewsCard extends React.Component<Props> {
         
         const Title = styled.p`
             font-size: 1.4rem;
+            color: ${theme.base_font_color};
             line-height: 1.3;
             font-weight: 300;
             display: block;

@@ -1,6 +1,6 @@
 ### Cryptoboard
 
-#### Skills displayed: 
+#### Main Skills displayed: 
   * React front-end development
   * Chart-based data visualization
   * Responsive design
@@ -26,7 +26,17 @@
   * Jest (Unit tests)
   * Cypress (E2E tests)
 
+#### Running in dev mode
+```
+npm install
+npm start
+```
 #### Running with Docker
+0. Build app
+```
+npm install
+npm run build
+```
 1. Build image
 ```
 docker build -t cryptoboard .

@@ -7,6 +7,7 @@ export enum CommonActionTypes {
     CLOSE_SIDEBAR = 'CLOSE_SIDEBAR',
     TOGGLE_LOADING_OPEN = 'TOGGLE_LOADING_OPEN',
     TOGGLE_LOADING_CLOSED = 'TOGGLE_LOADING_CLOSED',
+    TOGGLE_THEME = 'TOGGLE_THEME',
 }
 
 export enum topListActionTypes {

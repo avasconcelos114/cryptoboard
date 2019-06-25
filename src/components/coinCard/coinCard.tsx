@@ -28,6 +28,7 @@ export class CoinCard extends React.Component<Props> {
             justify-content: center;
             align-items: center;
             min-width: 350px;
+
             ${breakpoint('mobile')`
                 width: 100%;
             `}
@@ -70,6 +71,7 @@ export class CoinCard extends React.Component<Props> {
             font-weight: 300;
             display: flex;
             margin: 0 10px;
+            color: ${theme.base_font_color};
         `;
         
         const Image = styled.img`

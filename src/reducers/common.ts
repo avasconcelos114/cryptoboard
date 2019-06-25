@@ -3,13 +3,12 @@ import {CommonActionTypes} from '../actions/actionTypes';
 
 const initialState = {
     menus: Constants.menuItems,
-    activeTheme: 'light',
     theme: Constants.themes['light'],
     isLoading: false,
     isSidebarOpen: false,
 };
 
-export default function(state: object = initialState, action: any) {
+export default function(state: any = initialState, action: any) {
     switch (action.type) {
     case CommonActionTypes.OPEN_SIDEBAR:
         return {
@@ -30,6 +29,12 @@ export default function(state: object = initialState, action: any) {
         return {
             ...state,
             isLoading: false,
+        }
+    case CommonActionTypes.TOGGLE_THEME:
+        return {
+            ...state,
+            // @ts-ignore
+            theme: Constants.themes[action.theme],
         }
     default:
         return state;
