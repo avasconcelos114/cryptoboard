@@ -10,6 +10,13 @@ export enum CommonActionTypes {
     TOGGLE_THEME = 'TOGGLE_THEME',
 }
 
-export enum topListActionTypes {
+export enum TopListActionTypes {
     FETCH_TOP_LIST = 'FETCH_TOP_LIST',
+}
+
+export enum DashboardActionTypes {
+    FETCH_OPTIONS = 'FETCH_OPTIONS',
+    FETCH_EXCHANGE_VOLUME = 'FETCH_EXCHANGE_VOLUME',
+    FETCH_DAILY_AVERAGE = 'FETCH_DAILY_AVERAGE',
+    FETCH_TIMECHART_DATA = 'FETCH_TIMECHART_DATA',
 }

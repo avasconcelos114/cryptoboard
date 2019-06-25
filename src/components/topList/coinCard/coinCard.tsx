@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
 import {Power3, TweenLite} from 'gsap';
-import {Theme, Coin} from '../../constants/types';
+import {Theme, Coin} from '../../../constants/types';
 
 interface Props {
     index: number,

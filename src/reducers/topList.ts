@@ -1,4 +1,4 @@
-import {topListActionTypes} from '../actions/actionTypes'
+import {TopListActionTypes} from '../actions/actionTypes'
 
 const initialState = {
     topList: [],
@@ -6,7 +6,7 @@ const initialState = {
 
 export default function(state: object = initialState, action: any) {
     switch (action.type) {
-        case topListActionTypes.FETCH_TOP_LIST:
+        case TopListActionTypes.FETCH_TOP_LIST:
             return {
                 ...state,
                 topList: action.topList,

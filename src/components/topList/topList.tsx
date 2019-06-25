@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
 import {Theme, Coin} from '../../constants/types';
-import CoinCard from '../coinCard';
+import CoinCard from './coinCard';
 interface Props {
     theme: Theme,
     actions: any,

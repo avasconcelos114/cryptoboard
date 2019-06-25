@@ -5,9 +5,17 @@ import {Theme} from '../../constants/types';
 
 interface Props {
     theme: Theme,
+    actions: any,
 }
 
 export class Dashboard extends React.Component<Props> {
+    componentDidMount() {
+        // this.props.actions.fetchOptions()
+        // this.props.actions.fetchDailyAverage()
+        // this.props.actions.fetchTimechartData()
+        // this.props.actions.fetchExchangeVolume()
+    }
+
     render() {
         const {theme} = this.props
         const Container = styled.div`

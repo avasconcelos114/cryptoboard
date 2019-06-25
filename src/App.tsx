@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter} from 'react-router-dom';
+import {HashRouter} from 'react-router-dom';
 import {Provider} from 'react-redux';
 
 import store from './store';
@@ -9,11 +9,11 @@ import Root from './components/root';
 export class App extends React.Component {
     render() {
         return (
-            <BrowserRouter>
+            <HashRouter>
                 <Provider store={store}>
                     <Root />
                 </Provider>
-            </BrowserRouter>
+            </HashRouter>
         );
     }
 }

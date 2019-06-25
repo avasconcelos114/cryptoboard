@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 
-import selector from '../../selectors';
+import selector from '../../../selectors';
 import CoinCard from './coinCard';
 
 function mapStateToProps(state) {

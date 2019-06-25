@@ -2,10 +2,10 @@ import {ActionCreator, Dispatch} from 'redux';
 import {ThunkAction} from 'redux-thunk';
 import axios from 'axios';
 import {api} from '../constants';
-import {topListActionTypes} from './actionTypes'
+import {TopListActionTypes} from './actionTypes'
 
 interface FetchTopListAction {
-    type: topListActionTypes.FETCH_TOP_LIST,
+    type: TopListActionTypes.FETCH_TOP_LIST,
 }
 
 export const fetchTopList: ActionCreator<
@@ -23,7 +23,7 @@ export const fetchTopList: ActionCreator<
     await axios.get(url, config)
     .then((response) => {
         dispatch({
-            type: topListActionTypes.FETCH_TOP_LIST,
+            type: TopListActionTypes.FETCH_TOP_LIST,
             topList: response.data.Data
         })
     }).catch((error) => {

@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
+import {Power3, TweenLite} from 'gsap';
 import breakpoint from 'styled-components-breakpoint';
 
 import {Menu, Theme} from '../../constants/types';
@@ -11,6 +12,14 @@ interface Props {
 }
 
 export class MenuList extends React.PureComponent<Props> {
+
+    closeMobileSidebar = () => {
+        const sidebar = document.querySelector('#mobile-sidebar') as HTMLElement
+        if (sidebar === null) {
+            return
+        }
+        TweenLite.to(sidebar, 0.8, {width: '0%', ease: Power3.easeOut})
+    }
 
     render() {
         const {menus, theme} = this.props;
@@ -51,8 +60,8 @@ export class MenuList extends React.PureComponent<Props> {
         menus.forEach((menu) => {
             menuElements.push(
                 <MenuItem key={menu.route}>
-                    <MenuImage src={`/assets/img/${menu.route}_icon.png`}/>
-                    <Link to={`/${menu.route}`}>{menu.title}</Link>
+                    <MenuImage src={`${process.env.PUBLIC_URL}/assets/img/${menu.route}_icon.png`}/>
+                    <Link onClick={this.closeMobileSidebar} to={`/${menu.route}`}>{menu.title}</Link>
                 </MenuItem>
             );
         })

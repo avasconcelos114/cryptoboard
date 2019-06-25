@@ -75,7 +75,7 @@ export class Header extends React.Component<Props, State> {
             position: absolute;
             right: 0;
             cursor: pointer;
-            background: url(/assets/img/hamburger_icon.png);
+            background: url(${process.env.PUBLIC_URL}/assets/img/hamburger_icon.png);
             background-size: contain;
             background-repeat: no-repeat;
             border: none;
