@@ -1,28 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
-import {Theme, Coin} from '../../constants/types';
+import { Theme, Coin } from '../../constants/types';
 import CoinCard from './coinCard';
 interface Props {
-    theme: Theme,
-    actions: any,
-    topList: Coin[],
+    theme: Theme;
+    actions: any;
+    topList: Coin[];
 }
 
 export class TopList extends React.Component<Props> {
-    componentDidMount() {
-        this.props.actions.openLoadingScreen()
-        this.props.actions.fetchTopList()
+    public componentDidMount() {
+        this.props.actions.openLoadingScreen();
+        this.props.actions.fetchTopList();
     }
 
-    componentWillReceiveProps(nextProps: any) {
+    public componentWillReceiveProps(nextProps: any) {
         if (nextProps.topList.length > 0) {
-            this.props.actions.closeLoadingScreen()
+            this.props.actions.closeLoadingScreen();
         }
     }
 
-    render() {
-        const {theme, topList} = this.props
+    public render() {
+        const { theme, topList } = this.props;
         const Container = styled.div`
             width: 100%;
             display: flex;
@@ -46,7 +46,7 @@ export class TopList extends React.Component<Props> {
         const Title = styled.h1`
             margin: 50px 0px 0px 50px;
             font-size: 3rem;
-            color: ${theme.base_font_color};
+            color: ${theme.baseFontColor};
         `;
 
         const CoinContainer = styled.div`
@@ -57,20 +57,16 @@ export class TopList extends React.Component<Props> {
             height: calc(100% - 90px);
             overflow: auto;
         `;
-        const coins: any[] = []
+        const coins: any[] = [];
         topList.forEach((coin, index) => {
-            coins.push(
-                <CoinCard key={index} coin={coin} index={index}/>
-            )
-        })
+            coins.push(<CoinCard key={index} coin={coin} index={index} />);
+        });
         return (
             <Container>
                 <TitleContainer>
                     <Title>{'Top Coins'}</Title>
                 </TitleContainer>
-                <CoinContainer>
-                    {coins}
-                </CoinContainer>
+                <CoinContainer>{coins}</CoinContainer>
             </Container>
         );
     }

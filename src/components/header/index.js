@@ -1,10 +1,10 @@
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Header from './header';
 import selector from '../../selectors';
 
 function mapStateToProps(state) {
-    const theme = selector.getTheme(state)
+    const theme = selector.getTheme(state);
     return {
         theme,
     };

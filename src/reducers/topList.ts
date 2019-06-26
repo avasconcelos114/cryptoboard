@@ -1,4 +1,4 @@
-import {TopListActionTypes} from '../actions/actionTypes'
+import { TopListActionTypes } from '../actions/actionTypes';
 
 const initialState = {
     topList: [],
@@ -10,8 +10,8 @@ export default function(state: object = initialState, action: any) {
             return {
                 ...state,
                 topList: action.topList,
-            }
+            };
         default:
-        return state;
+            return state;
     }
 }

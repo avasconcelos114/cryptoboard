@@ -1,8 +1,8 @@
 interface Store {
-    topList: any
+    topList: any;
 }
 
 export const getTopList = (store: Store) => {
-    console.log(store)
-    return store.topList.topList
-}
+    console.log(store);
+    return store.topList.topList;
+};

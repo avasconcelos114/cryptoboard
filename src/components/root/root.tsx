@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Switch, Route} from 'react-router-dom';
-import {Theme} from '../../constants/types';
+import { Switch, Route } from 'react-router-dom';
+import { Theme } from '../../constants/types';
 
 import Sidebar from '../sidebar';
 import Header from '../header';
@@ -14,18 +14,18 @@ import News from '../news';
 import NotFound from '../notFound';
 
 interface Props {
-    theme: Theme,
+    theme: Theme;
 }
 
 export class Root extends React.Component<Props> {
-    render() {
-        const {theme} = this.props
+    public render() {
+        const { theme } = this.props;
         const AppContainer = styled.div`
             height: 100%;
             width: 100%;
             display: flex;
             flex-direction: row;
-            background: ${theme.main_background};
+            background: ${theme.mainBackground};
         `;
 
         const MainViewContainer = styled.div`
@@ -42,12 +42,12 @@ export class Root extends React.Component<Props> {
                 <MainViewContainer>
                     <Header />
                     <Switch>
-                        <Route exact path="/" component={Dashboard}/>
-                        <Route path="/dashboard" component={Dashboard}/>
-                        <Route path="/top_coins" component={TopList}/>
-                        <Route path="/all_coins" component={CoinList}/>
-                        <Route path="/news" component={News}/>
-                        <Route component={NotFound}/>
+                        <Route exact path="/" component={Dashboard} />
+                        <Route path="/dashboard" component={Dashboard} />
+                        <Route path="/top_coins" component={TopList} />
+                        <Route path="/all_coins" component={CoinList} />
+                        <Route path="/news" component={News} />
+                        <Route component={NotFound} />
                     </Switch>
                 </MainViewContainer>
             </AppContainer>

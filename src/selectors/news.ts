@@ -1,7 +1,7 @@
 interface Store {
-    news: any
+    news: any;
 }
 
 export const getNews = (store: Store) => {
-    return store.news.newsList
-} 
+    return store.news.newsList;
+};

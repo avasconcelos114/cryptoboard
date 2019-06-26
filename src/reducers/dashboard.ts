@@ -1,4 +1,4 @@
-import {DashboardActionTypes} from '../actions/actionTypes'
+import { DashboardActionTypes } from '../actions/actionTypes';
 
 const initialState = {
     options: [],
@@ -13,23 +13,23 @@ export default function(state: object = initialState, action: any) {
             return {
                 ...state,
                 options: action.options,
-            }
+            };
         case DashboardActionTypes.FETCH_DAILY_AVERAGE:
             return {
                 ...state,
                 dailyAverage: action.dailyAverage,
-            }
+            };
         case DashboardActionTypes.FETCH_EXCHANGE_VOLUME:
             return {
                 ...state,
                 exchangeVolume: action.exchangeVolume,
-            }
+            };
         case DashboardActionTypes.FETCH_TIMECHART_DATA:
             return {
                 ...state,
-                timechartData: action.timechartData
-            }
+                timechartData: action.timechartData,
+            };
         default:
-        return state;
+            return state;
     }
 }

@@ -1,74 +1,74 @@
 import { ActionCreator, Dispatch } from 'redux';
 import { ThunkAction } from 'redux-thunk';
-import {CommonActionTypes} from './actionTypes'
+import { CommonActionTypes } from './actionTypes';
 
 interface OpenSidebarAction {
-    type: CommonActionTypes.OPEN_SIDEBAR
+    type: CommonActionTypes.OPEN_SIDEBAR;
 }
 
 interface CloseSidebarAction {
-    type: CommonActionTypes.CLOSE_SIDEBAR
+    type: CommonActionTypes.CLOSE_SIDEBAR;
 }
 
 interface OpenLoadingAction {
-    type: CommonActionTypes.TOGGLE_LOADING_OPEN
+    type: CommonActionTypes.TOGGLE_LOADING_OPEN;
 }
 
 interface CloseLoadingAction {
-    type: CommonActionTypes.TOGGLE_LOADING_CLOSED
+    type: CommonActionTypes.TOGGLE_LOADING_CLOSED;
 }
 
 interface ToggleThemeAction {
-  type: CommonActionTypes.TOGGLE_THEME
+    type: CommonActionTypes.TOGGLE_THEME;
 }
 
 export const openSidebar: ActionCreator<
-  ThunkAction<Promise<any>, null, null, OpenSidebarAction>
+    ThunkAction<Promise<any>, null, null, OpenSidebarAction>
 > = () => {
-  return async (dispatch: Dispatch) => {
-    dispatch({
-        type: CommonActionTypes.OPEN_SIDEBAR
-    })
-  };
+    return async (dispatch: Dispatch) => {
+        dispatch({
+            type: CommonActionTypes.OPEN_SIDEBAR,
+        });
+    };
 };
 
 export const closeSidebar: ActionCreator<
-  ThunkAction<Promise<any>, null, null, CloseSidebarAction>
+    ThunkAction<Promise<any>, null, null, CloseSidebarAction>
 > = () => {
-  return async (dispatch: Dispatch) => {
-    dispatch({
-        type: CommonActionTypes.CLOSE_SIDEBAR
-    })
-  };
+    return async (dispatch: Dispatch) => {
+        dispatch({
+            type: CommonActionTypes.CLOSE_SIDEBAR,
+        });
+    };
 };
 
 export const openLoadingScreen: ActionCreator<
-  ThunkAction<Promise<any>, null, null, OpenLoadingAction>
+    ThunkAction<Promise<any>, null, null, OpenLoadingAction>
 > = () => {
-  return async (dispatch: Dispatch) => {
-    dispatch({
-        type: CommonActionTypes.TOGGLE_LOADING_OPEN
-    })
-  };
+    return async (dispatch: Dispatch) => {
+        dispatch({
+            type: CommonActionTypes.TOGGLE_LOADING_OPEN,
+        });
+    };
 };
 
 export const closeLoadingScreen: ActionCreator<
-  ThunkAction<Promise<any>, null, null, CloseLoadingAction>
+    ThunkAction<Promise<any>, null, null, CloseLoadingAction>
 > = () => {
-  return async (dispatch: Dispatch) => {
-    dispatch({
-        type: CommonActionTypes.TOGGLE_LOADING_CLOSED
-    })
-  };
+    return async (dispatch: Dispatch) => {
+        dispatch({
+            type: CommonActionTypes.TOGGLE_LOADING_CLOSED,
+        });
+    };
 };
 
 export const toggleTheme: ActionCreator<
-  ThunkAction<Promise<any>, null, null, ToggleThemeAction>
+    ThunkAction<Promise<any>, null, null, ToggleThemeAction>
 > = (theme: string) => {
-  return async (dispatch: Dispatch) => {
-    dispatch({
-        type: CommonActionTypes.TOGGLE_THEME,
-        theme,
-    })
-  };
+    return async (dispatch: Dispatch) => {
+        dispatch({
+            type: CommonActionTypes.TOGGLE_THEME,
+            theme,
+        });
+    };
 };

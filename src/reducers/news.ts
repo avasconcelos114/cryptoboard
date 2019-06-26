@@ -1,4 +1,4 @@
-import {NewsActionTypes} from '../actions/actionTypes'
+import { NewsActionTypes } from '../actions/actionTypes';
 
 const initialState = {
     newsList: [],
@@ -12,8 +12,8 @@ export default function(state: object = initialState, action: any) {
             return {
                 ...state,
                 newsList: action.news,
-            }
+            };
         default:
-        return state;
+            return state;
     }
 }

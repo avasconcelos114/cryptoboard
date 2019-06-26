@@ -1,18 +1,18 @@
 import React from 'react';
 import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
-import {Power3, TweenLite} from 'gsap';
-import {Theme} from '../../constants/types';
+import { Power3, TweenLite } from 'gsap';
+import { Theme } from '../../constants/types';
 
 interface Props {
-    theme: Theme,
+    theme: Theme;
 }
 
 interface State {
-    isMenuOpen: boolean,
+    isMenuOpen: boolean;
 }
 export class Header extends React.Component<Props, State> {
-    constructor(props: any) {
+    private constructor(props: any) {
         super(props);
 
         this.state = {
@@ -20,38 +20,40 @@ export class Header extends React.Component<Props, State> {
         };
     }
 
-    toggleSidebar = () => {
-        const sidebar = document.querySelector('#mobile-sidebar') as HTMLElement
+    public toggleSidebar = () => {
+        const sidebar = document.querySelector(
+            '#mobile-sidebar',
+        ) as HTMLElement;
         if (sidebar === null) {
-            return
+            return;
         }
         if (this.state.isMenuOpen) {
-            this.setState({isMenuOpen: false})
-            TweenLite.to(sidebar, 0.8, {width: '0%', ease: Power3.easeOut})
+            this.setState({ isMenuOpen: false });
+            TweenLite.to(sidebar, 0.8, { width: '0%', ease: Power3.easeOut });
         } else {
-            this.setState({isMenuOpen: true})
-            TweenLite.to(sidebar, 0.8, {width: '100%', ease: Power3.easeOut})
+            this.setState({ isMenuOpen: true });
+            TweenLite.to(sidebar, 0.8, { width: '100%', ease: Power3.easeOut });
         }
-    }
+    };
 
-    render() {
-        const {theme} = this.props;
+    public render() {
+        const { theme } = this.props;
         const HeaderContainer = styled.div`
             width: 100%;
             display: flex;
             align-items: center;
             z-index: 7;
             flex-direction: row;
-            
+
             ${breakpoint('mobile')`
                 height: 60px;
-                background: ${theme.header_background};
+                background: ${theme.sidebarBackground};
                 box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
             `}
-                
+
             ${breakpoint('tablet')`
                 height: 0px;
-                background: ${theme.main_background};
+                background: ${theme.mainBackground};
                 box-shadow: none;
             `}
         `;
@@ -60,11 +62,11 @@ export class Header extends React.Component<Props, State> {
             height: 60px;
             margin: 0px 20px;
             align-items: center;
-
+            color: ${theme.baseFontColor};
             ${breakpoint('mobile')`
                 display: flex;
             `}
-                
+
             ${breakpoint('tablet')`
                 display: none;
             `}
@@ -95,7 +97,7 @@ export class Header extends React.Component<Props, State> {
         return (
             <HeaderContainer>
                 <HeaderTitle>{'Cryptoboard'}</HeaderTitle>
-                <HamburgerMenu onClick={this.toggleSidebar}/>
+                <HamburgerMenu onClick={this.toggleSidebar} />
             </HeaderContainer>
         );
     }

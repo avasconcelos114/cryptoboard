@@ -1,2 +1,1 @@
-/// <reference types="react-scripts" />
-/// <reference path="modules.d.ts"/>
+import Modules from './modules';

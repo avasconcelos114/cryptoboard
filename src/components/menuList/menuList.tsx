@@ -1,28 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import {Link} from 'react-router-dom';
-import {Power3, TweenLite} from 'gsap';
+import { Link } from 'react-router-dom';
+import { Power3, TweenLite } from 'gsap';
 import breakpoint from 'styled-components-breakpoint';
 
-import {Menu, Theme} from '../../constants/types';
+import { Menu, Theme } from '../../constants/types';
 
 interface Props {
-    menus: Menu[],
-    theme: Theme,
+    menus: Menu[];
+    theme: Theme;
 }
 
 export class MenuList extends React.PureComponent<Props> {
-
-    closeMobileSidebar = () => {
-        const sidebar = document.querySelector('#mobile-sidebar') as HTMLElement
+    public closeMobileSidebar = () => {
+        const sidebar = document.querySelector(
+            '#mobile-sidebar',
+        ) as HTMLElement;
         if (sidebar === null) {
-            return
+            return;
         }
-        TweenLite.to(sidebar, 0.8, {width: '0%', ease: Power3.easeOut})
-    }
+        TweenLite.to(sidebar, 0.8, { width: '0%', ease: Power3.easeOut });
+    };
 
-    render() {
-        const {menus, theme} = this.props;
+    public render() {
+        const { menus, theme } = this.props;
         const menuElements: any[] = []; //TODO: figure out appropriate type for element array
         const MenuListContainer = styled.div`
             height: 100%;
@@ -39,9 +40,9 @@ export class MenuList extends React.PureComponent<Props> {
             a {
                 text-decoration: none;
                 font-size: 1.2rem;
-                color: ${theme.base_font_color};
+                color: ${theme.baseFontColor};
             }
-    
+
             ${breakpoint('mobile')`
                 justify-content: center;
             `}
@@ -49,7 +50,6 @@ export class MenuList extends React.PureComponent<Props> {
             ${breakpoint('tablet')`
                 justify-content: flex-start;
             `}
-            
         `;
         const MenuImage = styled.img`
             width: 60px;
@@ -57,20 +57,23 @@ export class MenuList extends React.PureComponent<Props> {
             margin-right: 20px;
         `;
 
-        menus.forEach((menu) => {
+        menus.forEach(menu => {
             menuElements.push(
                 <MenuItem key={menu.route}>
-                    <MenuImage src={`${process.env.PUBLIC_URL}/assets/img/${menu.route}_icon.png`}/>
-                    <Link onClick={this.closeMobileSidebar} to={`/${menu.route}`}>{menu.title}</Link>
-                </MenuItem>
+                    <MenuImage
+                        src={`${process.env.PUBLIC_URL}/assets/img/${menu.route}_icon.png`}
+                    />
+                    <Link
+                        onClick={this.closeMobileSidebar}
+                        to={`/${menu.route}`}
+                    >
+                        {menu.title}
+                    </Link>
+                </MenuItem>,
             );
-        })
+        });
 
-        return (
-            <MenuListContainer>
-                {menuElements}
-            </MenuListContainer>
-        );
+        return <MenuListContainer>{menuElements}</MenuListContainer>;
     }
 }
 

@@ -1,35 +1,34 @@
 import React from 'react';
 import styled from 'styled-components';
 import Zdog from 'zdog';
-import {Theme} from '../../constants/types';
+import { Theme } from '../../constants/types';
 
-type Props = {
-    isLoading: boolean,
-    theme: Theme
+interface Props {
+    isLoading: boolean;
+    theme: Theme;
 }
 
 let illo: any;
 
 export class Loading extends React.Component<Props> {
-    componentDidMount() {
-        this.drawAnimation()
-        
+    public componentDidMount() {
+        this.drawAnimation();
     }
 
-    componentDidUpdate() {
-        this.drawAnimation()
+    public componentDidUpdate() {
+        this.drawAnimation();
     }
 
-    drawAnimation = () => {
+    public drawAnimation = () => {
         const zoom = 6;
         if (document.querySelector('.zdog-canvas') === null) {
-            return
+            return;
         }
 
         illo = new Zdog.Illustration({
             element: '.zdog-canvas',
             zoom,
-            rotate: { x: -0.4 }
+            rotate: { x: -0.4 },
         });
 
         const TAU = Zdog.TAU;
@@ -37,24 +36,24 @@ export class Loading extends React.Component<Props> {
         // -- illustration shapes --- //
 
         const teeth = 8;
-        const frontZ = {z: 3};
-        const backZ = {z: -3};
+        const frontZ = { z: 3 };
+        const backZ = { z: -3 };
 
         const colorA = '#EA0';
         const colorB = '#345';
 
-        const gearPath = ( function() {
+        const gearPath = (function() {
             const path = [];
             const teethCount = teeth * 4;
-            for (let i=0; i < teethCount; i++) {
+            for (let i = 0; i < teethCount; i++) {
                 const isOuter = i % 4 < 2;
                 const radius = isOuter ? 12 : 9.5;
-                let theta = Math.ceil( i/2 ) * 2;
+                let theta = Math.ceil(i / 2) * 2;
                 theta += i % 2 ? -0.2 : 0.2;
-                theta = ( theta/teethCount + 1/teethCount ) * TAU ;
+                theta = (theta / teethCount + 1 / teethCount) * TAU;
                 path.push({
-                    x: Math.cos( theta ) * radius,
-                    y: Math.sin( theta ) * radius,
+                    x: Math.cos(theta) * radius,
+                    y: Math.sin(theta) * radius,
                 });
             }
             return path;
@@ -62,7 +61,7 @@ export class Loading extends React.Component<Props> {
 
         const gear = new Zdog.Anchor({
             addTo: illo,
-            rotate: { x: TAU/4 },
+            rotate: { x: TAU / 4 },
         });
 
         const gearSide = new Zdog.Anchor({
@@ -76,7 +75,7 @@ export class Loading extends React.Component<Props> {
             color: colorA,
             backface: false,
             fill: true,
-            stroke: 1/zoom,
+            stroke: 1 / zoom,
             closed: false,
         });
         // nub
@@ -92,36 +91,36 @@ export class Loading extends React.Component<Props> {
         });
 
         gearSide.copyGraph({
-            rotate: { y: TAU/2 },
+            rotate: { y: TAU / 2 },
             translate: backZ,
         });
 
-        gearPath.forEach( function( corner, i ) {
-            const nextCorner = gearPath[ i + 1 ] || gearPath[0];
+        gearPath.forEach(function(corner, i) {
+            const nextCorner = gearPath[i + 1] || gearPath[0];
             new Zdog.Shape({
                 addTo: gear,
                 path: [
-                new Zdog.Vector( corner ).add( frontZ ),
-                new Zdog.Vector( corner ).add( backZ ),
-                new Zdog.Vector( nextCorner ).add( backZ ),
-                new Zdog.Vector( nextCorner ).add( frontZ ),
+                    new Zdog.Vector(corner).add(frontZ),
+                    new Zdog.Vector(corner).add(backZ),
+                    new Zdog.Vector(nextCorner).add(backZ),
+                    new Zdog.Vector(nextCorner).add(frontZ),
                 ],
                 color: i % 2 ? colorA : colorB,
                 fill: true,
-                stroke: 1/zoom,
+                stroke: 1 / zoom,
             });
         });
         this.animate();
-    }
+    };
 
-    animate = () => {
+    public animate = () => {
         illo.rotate.y += 0.009;
         illo.updateRenderGraph();
         requestAnimationFrame(this.animate);
-    }
+    };
 
-    render() {
-        const {theme, isLoading} = this.props;
+    public render() {
+        const { theme, isLoading } = this.props;
         const LoadingContainer = styled.div`
             height: 100%;
             width: 100%;
@@ -132,30 +131,33 @@ export class Loading extends React.Component<Props> {
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            background: ${theme.loading_background}
+            background: ${theme.loadingBackground};
         `;
-        
+
         const LoadingCanvas = styled.canvas`
             display: flex;
             z-index: 11;
         `;
 
         const LoadingMessage = styled.h1`
-            color: ${theme.base_font_color};
+            color: ${theme.baseFontColor};
             letter-spacing: 1.7px;
         `;
 
         if (isLoading) {
             return (
                 <LoadingContainer>
-                    <LoadingCanvas className="zdog-canvas" width="240" height="240"></LoadingCanvas>
+                    <LoadingCanvas
+                        className="zdog-canvas"
+                        width="240"
+                        height="240"
+                    ></LoadingCanvas>
                     <LoadingMessage>Loading</LoadingMessage>
                 </LoadingContainer>
-            )
+            );
         }
-        return null
+        return null;
     }
 }
 
 export default Loading;
- 

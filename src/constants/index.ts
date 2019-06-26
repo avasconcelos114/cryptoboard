@@ -6,22 +6,21 @@
 */
 export const api = {
     token: '328615ca08e935e05a0ddd27d5c746093b35cb0387ecb5b64ff29bc7e63094cb',
-    endpoint: 'https://min-api.cryptocompare.com'
-}
+    endpoint: 'https://min-api.cryptocompare.com',
+};
 
 export const themes = {
     dark: {
-        base_font_color: 'rgba(255, 255, 255, 0.87)',
-        medium_font_color: 'rgba(255, 255, 255, 0.60)',
-        disabled_font_color: 'rgba(255, 255, 255, 0.38)',
-        drop_shadow: 'rgba(214,214,214,0.8)',
-        drop_shadow_hover: 'rgba(214,214,214,1)',
-        header_background: '#37474F',
-        loading_background: '#121212',
-        main_background: '#121212',
-        card_background: 'rgba(255, 255, 255, 0.07)',
-        card_line_color: 'rgba(255, 255, 255, 0.11)',
-        news_category_backgrounds: [
+        baseFontColor: 'rgba(255, 255, 255, 0.87)',
+        mediumFontColor: 'rgba(255, 255, 255, 0.60)',
+        disabledFontColor: 'rgba(255, 255, 255, 0.38)',
+        dropShadow: 'rgba(214,214,214,0.8)',
+        dropShadowHover: 'rgba(214,214,214,1)',
+        loadingBackground: '#121212',
+        mainBackground: '#121212',
+        cardBackground: 'rgba(255, 255, 255, 0.07)',
+        cardLineColor: 'rgba(255, 255, 255, 0.11)',
+        newsCategoryBackgrounds: [
             '#03A9F4',
             '#26C6DA',
             '#26A69A',
@@ -30,21 +29,19 @@ export const themes = {
             '#9C27B0',
             '#4527A0',
         ],
-        sidebar_background: 'rgba(255, 255, 255, 0.05)',
-        sidebar_font_color: '#FFFFFF',
+        sidebarBackground: 'rgba(255, 255, 255, 0.05)',
     },
     light: {
-        base_font_color: 'rgba(0, 0, 0, 0.87)',
-        medium_font_color: 'rgba(0, 0, 0, 0.60)',
-        disabled_font_color: 'rgba(0, 0, 0, 0.38)',
-        drop_shadow: 'rgba(214,214,214,0.4)',
-        drop_shadow_hover: 'rgba(214,214,214,0.6)',
-        header_background: '#FFFFFF',
-        loading_background: '#FAFAFA',
-        main_background: '#FAFAFA',
-        card_background: 'rgba(255, 255, 255, 1)',
-        card_line_color: '#E0E0E0',
-        news_category_backgrounds: [
+        baseFontColor: 'rgba(0, 0, 0, 0.87)',
+        mediumFontColor: 'rgba(0, 0, 0, 0.60)',
+        disabledFontColor: 'rgba(0, 0, 0, 0.38)',
+        dropShadow: 'rgba(214,214,214,0.4)',
+        dropShadowHover: 'rgba(214,214,214,0.6)',
+        loadingBackground: '#FAFAFA',
+        mainBackground: '#FAFAFA',
+        cardBackground: 'rgba(255, 255, 255, 1)',
+        cardLineColor: '#E0E0E0',
+        newsCategoryBackgrounds: [
             '#03A9F4',
             '#26C6DA',
             '#26A69A',
@@ -53,19 +50,18 @@ export const themes = {
             '#9C27B0',
             '#4527A0',
         ],
-        sidebar_background: '#FFFFFF',
-        sidebar_font_color: '#464545',
-    }
-}
+        sidebarBackground: '#FFFFFF',
+    },
+};
 
 export const menuItems = [
-    {title: 'Dashboard', route: 'dashboard'},
-    {title: 'Top List', route: 'top_coins'},
+    { title: 'Dashboard', route: 'dashboard' },
+    { title: 'Top List', route: 'top_coins' },
     // {title: 'All Coins', route: 'all_coins'},
-    {title: 'News', route: 'news'},
-]
+    { title: 'News', route: 'news' },
+];
 
 export default {
     themes,
     menuItems,
-}
+};

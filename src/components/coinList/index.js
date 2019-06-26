@@ -1,11 +1,11 @@
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import CoinList from './coinList';
 import selector from '../../selectors';
 
 function mapStateToProps(state) {
-    const theme = selector.getTheme(state)
+    const theme = selector.getTheme(state);
     return {
         theme,
     };
@@ -13,10 +13,11 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({
-            
-        }, dispatch),
+        actions: bindActionCreators({}, dispatch),
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CoinList);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(CoinList);

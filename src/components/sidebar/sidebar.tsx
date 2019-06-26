@@ -3,34 +3,34 @@ import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
 
 import MenuList from '../menuList';
-import {Theme} from '../../constants/types';
+import { Theme } from '../../constants/types';
 
 interface Props {
-    theme: Theme,
-    actions: any,
+    theme: Theme;
+    actions: any;
 }
 
 export class Sidebar extends React.PureComponent<Props> {
+    public toggleTheme = (theme: string) => {
+        this.props.actions.toggleTheme(theme);
+    };
 
-    toggleTheme = (theme: string) => {
-        this.props.actions.toggleTheme(theme)
-    }
-
-    render() {
-        const {theme} = this.props;
+    public render() {
+        const { theme } = this.props;
         const SidebarContainer = styled.div`
             height: 100%;
             display: flex;
         `;
 
         const Sidebar = styled.div`
-            background: ${theme.sidebar_background};
+            background: ${theme.sidebarBackground};
             height: 100%;
             position: relative;
             z-index: 8;
             width: 270px;
 
-            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+                0 3px 6px rgba(0, 0, 0, 0.23);
 
             ${breakpoint('mobile')`
                 display: none;
@@ -43,7 +43,7 @@ export class Sidebar extends React.PureComponent<Props> {
         `;
 
         const MobileSidebar = styled.div`
-            background: ${theme.sidebar_background};
+            background: ${theme.mainBackground};
             height: calc(100% - 60px);
             width: 100%;
             margin-top: 60px;
@@ -70,13 +70,13 @@ export class Sidebar extends React.PureComponent<Props> {
             height: 68px;
             margin: 0px 20px;
             align-items: center;
-            color: ${theme.base_font_color};
+            color: ${theme.baseFontColor};
         `;
 
         const SidebarSubtitle = styled.h3`
             font-size: 1rem;
             margin: 20px 20px 0px 20px;
-            color: ${theme.medium_font_color};
+            color: ${theme.mediumFontColor};
         `;
 
         const ThemeButtonContainer = styled.div`
@@ -91,13 +91,13 @@ export class Sidebar extends React.PureComponent<Props> {
             border: 1px solid rgba(0, 0, 0, 0.05);
             height: 40px;
             width: calc(50% - 10px);
-            box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16),
+                0 3px 6px rgba(0, 0, 0, 0.23);
             cursor: pointer;
         `;
-        
+
         return (
             <SidebarContainer>
-                
                 <Sidebar id="sidebar">
                     <SidebarTitle>{'Cryptoboard'}</SidebarTitle>
                     <SidebarSubtitle>{'MENUS'}</SidebarSubtitle>
@@ -119,7 +119,7 @@ export class Sidebar extends React.PureComponent<Props> {
                                 borderTopRightRadius: 4,
                                 borderBottomRightRadius: 4,
                                 background: '#121212',
-                                color: 'rgba(255, 255, 255, 0.87)'
+                                color: 'rgba(255, 255, 255, 0.87)',
                             }}
                             onClick={() => this.toggleTheme('dark')}
                         >
@@ -127,8 +127,33 @@ export class Sidebar extends React.PureComponent<Props> {
                         </ThemeButton>
                     </ThemeButtonContainer>
                 </Sidebar>
-                <MobileSidebar id="mobile-sidebar"> 
+
+                <MobileSidebar id="mobile-sidebar">
                     <MenuList />
+                    <ThemeButtonContainer>
+                        <ThemeButton
+                            style={{
+                                borderTopLeftRadius: 4,
+                                borderBottomLeftRadius: 4,
+                                background: '#FAFAFA',
+                                color: 'rgba(0, 0, 0, 0.87)',
+                            }}
+                            onClick={() => this.toggleTheme('light')}
+                        >
+                            {'Light'}
+                        </ThemeButton>
+                        <ThemeButton
+                            style={{
+                                borderTopRightRadius: 4,
+                                borderBottomRightRadius: 4,
+                                background: '#121212',
+                                color: 'rgba(255, 255, 255, 0.87)',
+                            }}
+                            onClick={() => this.toggleTheme('dark')}
+                        >
+                            {'Dark'}
+                        </ThemeButton>
+                    </ThemeButtonContainer>
                 </MobileSidebar>
             </SidebarContainer>
         );

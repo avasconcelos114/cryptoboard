@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import common from './common';
 import news from './news';
 import topList from './topList';

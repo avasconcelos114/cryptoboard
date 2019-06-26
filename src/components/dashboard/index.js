@@ -1,5 +1,5 @@
-import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Dashboard from './dashboard';
 import selector from '../../selectors';
@@ -11,11 +11,11 @@ import {
 } from '../../actions/dashboard';
 
 function mapStateToProps(state) {
-    const theme = selector.getTheme(state)
-    const options = selector.getOptions(state)
-    const dailyAverage = selector.getDailyAverage(state)
-    const timechartData = selector.getTimechartData(state)
-    const exchangeVolume = selector.getExchangeVolume(state)
+    const theme = selector.getTheme(state);
+    const options = selector.getOptions(state);
+    const dailyAverage = selector.getDailyAverage(state);
+    const timechartData = selector.getTimechartData(state);
+    const exchangeVolume = selector.getExchangeVolume(state);
 
     return {
         theme,
@@ -28,13 +28,19 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        actions: bindActionCreators({
-            fetchOptions,
-            fetchDailyAverage,
-            fetchTimechartData,
-            fetchExchangeVolume,
-        }, dispatch),
+        actions: bindActionCreators(
+            {
+                fetchOptions,
+                fetchDailyAverage,
+                fetchTimechartData,
+                fetchExchangeVolume,
+            },
+            dispatch,
+        ),
     };
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps,
+)(Dashboard);
