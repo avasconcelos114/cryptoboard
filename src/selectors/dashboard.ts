@@ -6,12 +6,12 @@ export const getOptions = (store: Store) => {
     return store.dashboard.options;
 };
 
-export const getDailyAverage = (store: Store) => {
-    return store.dashboard.dailyAverage;
-};
+export const getSelectedOption = (store: Store) => {
+    return store.dashboard.selectedOption
+}
 
-export const getExchangeVolume = (store: Store) => {
-    return store.dashboard.exchangeVolume;
+export const getCoinInfo = (store: Store) => {
+    return store.dashboard.coinInfo;
 };
 
 export const getTimechartData = (store: Store) => {

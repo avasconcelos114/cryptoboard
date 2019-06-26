@@ -67,14 +67,14 @@ export class CoinCard extends React.Component<Props> {
             align-items: center;
             height: 60px;
             border-bottom: 1px solid ${theme.cardLineColor};
-        `;
 
-        const Title = styled.h3`
-            font-size: 1.5rem;
-            font-weight: 300;
-            display: flex;
-            margin: 0 10px;
-            color: ${theme.baseFontColor};
+            h3 {
+                font-size: 1.5rem;
+                font-weight: 300;
+                display: flex;
+                margin: 0 10px;
+                color: ${theme.baseFontColor};
+            }
         `;
 
         const Image = styled.img`
@@ -118,9 +118,12 @@ export class CoinCard extends React.Component<Props> {
             <Container>
                 <Card id={`coin_${coin.CoinInfo.Id}`}>
                     <CardHeader>
-                        <Title>{`${index + 1}. ${
-                            coin.CoinInfo.FullName
-                        }`}</Title>
+                        <h3>
+                            {
+                                `${index + 1}. 
+                                ${coin.CoinInfo.FullName}`
+                            }
+                        </h3>
                         <Image
                             src={`https://cryptocompare.com${coin.CoinInfo.ImageUrl}`}
                         />

@@ -132,16 +132,9 @@ export class NewsCard extends React.Component<Props> {
         categories.forEach((name, index) => {
             if (index < 3) {
                 categoryElements.push(
-                    <Category
+                    <Category 
                         style={{
-                            background:
-                                theme.newsCategoryBackgrounds[
-                                    Math.floor(
-                                        Math.random() *
-                                            theme.newsCategoryBackgrounds
-                                                .length,
-                                    )
-                                ],
+                            background: theme.newsCategoryBackgrounds[Math.floor(Math.random() * theme.newsCategoryBackgrounds.length)],
                         }}
                     >
                         {name}

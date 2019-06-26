@@ -5,24 +5,23 @@ import Dashboard from './dashboard';
 import selector from '../../selectors';
 import {
     fetchOptions,
-    fetchDailyAverage,
+    fetchCoinInfo,
     fetchTimechartData,
-    fetchExchangeVolume,
 } from '../../actions/dashboard';
 
 function mapStateToProps(state) {
     const theme = selector.getTheme(state);
     const options = selector.getOptions(state);
-    const dailyAverage = selector.getDailyAverage(state);
+    const coinInfo = selector.getCoinInfo(state);
     const timechartData = selector.getTimechartData(state);
-    const exchangeVolume = selector.getExchangeVolume(state);
+    const selectedOption = selector.getSelectedOption(state);
 
     return {
         theme,
         options,
-        dailyAverage,
+        coinInfo,
         timechartData,
-        exchangeVolume,
+        selectedOption,
     };
 }
 
@@ -31,9 +30,8 @@ function mapDispatchToProps(dispatch) {
         actions: bindActionCreators(
             {
                 fetchOptions,
-                fetchDailyAverage,
+                fetchCoinInfo,
                 fetchTimechartData,
-                fetchExchangeVolume,
             },
             dispatch,
         ),

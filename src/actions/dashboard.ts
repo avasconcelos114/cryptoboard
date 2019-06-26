@@ -8,12 +8,8 @@ interface FetchOptionsAction {
     type: DashboardActionTypes.FETCH_OPTIONS;
 }
 
-interface FetchDailyAverageAction {
-    type: DashboardActionTypes.FETCH_DAILY_AVERAGE;
-}
-
-interface FetchExchangeVolumeAction {
-    type: DashboardActionTypes.FETCH_EXCHANGE_VOLUME;
+interface FetchCoinInfoAction {
+    type: DashboardActionTypes.FETCH_COIN_INFO;
 }
 
 interface FetchTimechartDataAction {
@@ -46,9 +42,9 @@ export const fetchOptions: ActionCreator<
     };
 };
 
-export const fetchDailyAverage: ActionCreator<
-    ThunkAction<Promise<any>, null, null, FetchDailyAverageAction>
-> = () => {
+export const fetchCoinInfo: ActionCreator<
+    ThunkAction<Promise<any>, null, null, FetchCoinInfoAction>
+> = (symbol: string) => {
     return async (dispatch: Dispatch) => {
         const config = {
             headers: {
@@ -56,40 +52,14 @@ export const fetchDailyAverage: ActionCreator<
             },
         };
 
-        let url = `${api.endpoint}/data/dayAvg?fsym=BTC&tsym=USD`;
+        let url = `${api.endpoint}/data/pricemultifull?fsyms=${symbol}&tsyms=USD`;
 
         await axios
             .get(url, config)
             .then(response => {
                 dispatch({
-                    type: DashboardActionTypes.FETCH_DAILY_AVERAGE,
-                    dailyAverage: response.data.USD,
-                });
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
-};
-
-export const setExchangeVolume: ActionCreator<
-    ThunkAction<Promise<any>, null, null, FetchExchangeVolumeAction>
-> = (id: string) => {
-    return async (dispatch: Dispatch) => {
-        const config = {
-            headers: {
-                authorization: `Bearer ${api.token}`,
-            },
-        };
-
-        let url = `${api.endpoint}/data/exchange/histoday?tsym=USD&limit=10`;
-
-        await axios
-            .get(url, config)
-            .then(response => {
-                dispatch({
-                    type: DashboardActionTypes.FETCH_EXCHANGE_VOLUME,
-                    exchangeVolume: response.data.Data,
+                    type: DashboardActionTypes.FETCH_COIN_INFO,
+                    coinInfo: response.data.DISPLAY[symbol],
                 });
             })
             .catch(error => {
@@ -100,7 +70,7 @@ export const setExchangeVolume: ActionCreator<
 
 export const fetchTimechartData: ActionCreator<
     ThunkAction<Promise<any>, null, null, FetchTimechartDataAction>
-> = () => {
+> = (symbol: string) => {
     return async (dispatch: Dispatch) => {
         const config = {
             headers: {
@@ -108,7 +78,7 @@ export const fetchTimechartData: ActionCreator<
             },
         };
 
-        let url = `${api.endpoint}/data/histoday?fsym=BTC&tsym=USD&limit=10`;
+        let url = `${api.endpoint}/data/histoday?fsym=${symbol}&tsym=USD&limit=5`;
 
         await axios
             .get(url, config)
