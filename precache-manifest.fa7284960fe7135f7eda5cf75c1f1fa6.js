@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6566dd485af0c23b6a3e853e0eaf2513",
+    "revision": "46c5794840167c81bf9dda3e23890876",
     "url": "/cryptoboard/index.html"
   },
   {
@@ -8,8 +8,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/cryptoboard/static/js/2.39eb8182.chunk.js"
   },
   {
-    "revision": "b7f1c366054e4d10a285",
-    "url": "/cryptoboard/static/js/main.70e11630.chunk.js"
+    "revision": "4268474d8946949b16cd",
+    "url": "/cryptoboard/static/js/main.643dd17c.chunk.js"
   },
   {
     "revision": "529113d17c384049eafe",
