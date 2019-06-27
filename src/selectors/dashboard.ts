@@ -7,8 +7,8 @@ export const getOptions = (store: Store) => {
 };
 
 export const getSelectedOption = (store: Store) => {
-    return store.dashboard.selectedOption
-}
+    return store.dashboard.selectedOption;
+};
 
 export const getCoinInfo = (store: Store) => {
     return store.dashboard.coinInfo;
@@ -20,4 +20,4 @@ export const getValueTimechart = (store: Store) => {
 
 export const getVolumeTimechart = (store: Store) => {
     return store.dashboard.volumeTimechart;
-}
+};

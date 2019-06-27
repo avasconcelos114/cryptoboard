@@ -1,7 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import {
+    LineChart,
+    Line,
+    CartesianGrid,
+    XAxis,
+    YAxis,
+    Tooltip,
+    Legend,
+    ResponsiveContainer,
+} from 'recharts';
 
 import { Theme } from '../../constants/types';
 
@@ -16,25 +25,52 @@ interface Props {
 
 export class Dashboard extends React.Component<Props> {
     public componentDidMount() {
-        const {selectedOption, actions: {fetchOptions, fetchCoinInfo, fetchValueTimechartData, fetchVolumeTimechartData}} = this.props
-        fetchOptions()
-        fetchCoinInfo(selectedOption)
-        fetchValueTimechartData(selectedOption)
-        fetchVolumeTimechartData(selectedOption)
+        const {
+            selectedOption,
+            actions: {
+                fetchOptions,
+                fetchCoinInfo,
+                fetchValueTimechartData,
+                fetchVolumeTimechartData,
+            },
+        } = this.props;
+        fetchOptions();
+        fetchCoinInfo(selectedOption);
+        fetchValueTimechartData(selectedOption);
+        fetchVolumeTimechartData(selectedOption);
     }
 
     public timeConverter = (timestamp: number) => {
-            const a = new Date(timestamp * 1000);
-            const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-            const month = months[a.getMonth()];
-            const date = a.getDate();
+        const a = new Date(timestamp * 1000);
+        const months = [
+            'Jan',
+            'Feb',
+            'Mar',
+            'Apr',
+            'May',
+            'Jun',
+            'Jul',
+            'Aug',
+            'Sep',
+            'Oct',
+            'Nov',
+            'Dec',
+        ];
+        const month = months[a.getMonth()];
+        const date = a.getDate();
 
-            const time = date + ' ' + month;
-            return time;
-    }
+        const time = date + ' ' + month;
+        return time;
+    };
 
     public render() {
-        const { theme, selectedOption, coinInfo, valueTimechart, volumeTimechart } = this.props;
+        const {
+            theme,
+            selectedOption,
+            coinInfo,
+            valueTimechart,
+            volumeTimechart,
+        } = this.props;
         const Container = styled.div`
             width: 100%;
             display: flex;
@@ -132,7 +168,7 @@ export class Dashboard extends React.Component<Props> {
             justify-content: center;
             align-items: center;
 
-            span {
+            .recharts-legend-item-text {
                 color: ${theme.mediumFontColor};
             }
 
@@ -153,14 +189,14 @@ export class Dashboard extends React.Component<Props> {
                 `}
             }
         `;
-        
+
         valueTimechart.forEach((data: any) => {
-            data.timestamp = this.timeConverter(data.time)
-        })
+            data.timestamp = this.timeConverter(data.time);
+        });
 
         volumeTimechart.forEach((data: any) => {
-            data.timestamp = this.timeConverter(data.time)
-        })
+            data.timestamp = this.timeConverter(data.time);
+        });
 
         return (
             <Container>
@@ -174,7 +210,19 @@ export class Dashboard extends React.Component<Props> {
                                 <h3>{`${selectedOption} - Daily Average`}</h3>
                             </CardHeader>
                             <CardBody>
-                                <h2 style={{color: theme.newsCategoryBackgrounds[Math.floor(Math.random() * theme.newsCategoryBackgrounds.length)]}}>
+                                <h2
+                                    style={{
+                                        color:
+                                            theme.newsCategoryBackgrounds[
+                                                Math.floor(
+                                                    Math.random() *
+                                                        theme
+                                                            .newsCategoryBackgrounds
+                                                            .length,
+                                                )
+                                            ],
+                                    }}
+                                >
                                     {coinInfo.USD.PRICE}
                                 </h2>
                             </CardBody>
@@ -187,25 +235,61 @@ export class Dashboard extends React.Component<Props> {
                                 <h3>{`${selectedOption} - Exchange Volume`}</h3>
                             </CardHeader>
                             <CardBody>
-                                <h2 style={{color: theme.newsCategoryBackgrounds[Math.floor(Math.random() * theme.newsCategoryBackgrounds.length)]}}>
+                                <h2
+                                    style={{
+                                        color:
+                                            theme.newsCategoryBackgrounds[
+                                                Math.floor(
+                                                    Math.random() *
+                                                        theme
+                                                            .newsCategoryBackgrounds
+                                                            .length,
+                                                )
+                                            ],
+                                    }}
+                                >
                                     {coinInfo.USD.VOLUMEDAY}
                                 </h2>
                             </CardBody>
                         </Card>
                     </CardContainer>
 
-                    <CardContainer style={{height: 400}}>
+                    <CardContainer style={{ height: 400 }}>
                         <Card>
                             <CardHeader>
                                 <h3>{`${selectedOption} - Value Timechart`}</h3>
                             </CardHeader>
                             <CardBody>
                                 <ResponsiveContainer width="100%" height={300}>
-                                    <LineChart data={valueTimechart} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                                        <Line type="monotone" dataKey="high" stroke="#9C27B0" activeDot={{ r: 8 }}/>
-                                        <Line type="monotone" dataKey="open" stroke="#26C6DA"/>
-                                        <Line type="monotone" dataKey="low" stroke="#26A69A" />
-                                        <CartesianGrid stroke={theme.mediumFontColor} strokeDasharray="5 5" />
+                                    <LineChart
+                                        data={valueTimechart}
+                                        margin={{
+                                            top: 5,
+                                            right: 20,
+                                            bottom: 5,
+                                            left: 0,
+                                        }}
+                                    >
+                                        <Line
+                                            type="monotone"
+                                            dataKey="high"
+                                            stroke="#9C27B0"
+                                            activeDot={{ r: 8 }}
+                                        />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="open"
+                                            stroke="#26C6DA"
+                                        />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="low"
+                                            stroke="#26A69A"
+                                        />
+                                        <CartesianGrid
+                                            stroke={theme.mediumFontColor}
+                                            strokeDasharray="5 5"
+                                        />
                                         <Tooltip />
                                         <Legend />
                                         <XAxis dataKey="timestamp" />
@@ -216,16 +300,32 @@ export class Dashboard extends React.Component<Props> {
                         </Card>
                     </CardContainer>
 
-                    <CardContainer style={{height: 400}}>
+                    <CardContainer style={{ height: 400 }}>
                         <Card>
                             <CardHeader>
                                 <h3>{`${selectedOption} - Volume Timechart`}</h3>
                             </CardHeader>
                             <CardBody>
                                 <ResponsiveContainer width="100%" height={300}>
-                                    <LineChart data={volumeTimechart} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                                        <Line type="monotone" dataKey="volume" stroke="#26C6DA" activeDot={{ r: 8 }} />
-                                        <CartesianGrid stroke={theme.mediumFontColor} strokeDasharray="5 5" />
+                                    <LineChart
+                                        data={volumeTimechart}
+                                        margin={{
+                                            top: 5,
+                                            right: 20,
+                                            bottom: 5,
+                                            left: 0,
+                                        }}
+                                    >
+                                        <Line
+                                            type="monotone"
+                                            dataKey="volume"
+                                            stroke="#26C6DA"
+                                            activeDot={{ r: 8 }}
+                                        />
+                                        <CartesianGrid
+                                            stroke={theme.mediumFontColor}
+                                            strokeDasharray="5 5"
+                                        />
                                         <Tooltip />
                                         <Legend />
                                         <XAxis dataKey="timestamp" />
@@ -235,7 +335,6 @@ export class Dashboard extends React.Component<Props> {
                             </CardBody>
                         </Card>
                     </CardContainer>
-
                 </DashboardContents>
             </Container>
         );

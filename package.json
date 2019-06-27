@@ -34,7 +34,7 @@
     "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet",
+    "lint": "tsc --noEmit && eslint '*/**/*.{js,ts,tsx}' --quiet --fix",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

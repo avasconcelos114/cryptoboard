@@ -7,7 +7,7 @@ const initialState = {
         USD: {
             PRICE: 0,
             VOLUMEDAY: 0,
-        }
+        },
     },
     exchangeVolume: 0,
     valueTimechart: [],
@@ -35,7 +35,7 @@ export default function(state: object = initialState, action: any) {
             return {
                 ...state,
                 volumeTimechart: action.data,
-            }
+            };
         default:
             return state;
     }

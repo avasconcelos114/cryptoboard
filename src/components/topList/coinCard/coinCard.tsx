@@ -118,12 +118,7 @@ export class CoinCard extends React.Component<Props> {
             <Container>
                 <Card id={`coin_${coin.CoinInfo.Id}`}>
                     <CardHeader>
-                        <h3>
-                            {
-                                `${index + 1}. 
-                                ${coin.CoinInfo.FullName}`
-                            }
-                        </h3>
+                        <h3>{`${index + 1}. ${coin.CoinInfo.FullName}`}</h3>
                         <Image
                             src={`https://cryptocompare.com${coin.CoinInfo.ImageUrl}`}
                         />
