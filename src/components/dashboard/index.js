@@ -6,22 +6,25 @@ import selector from '../../selectors';
 import {
     fetchOptions,
     fetchCoinInfo,
-    fetchTimechartData,
+    fetchValueTimechartData,
+    fetchVolumeTimechartData,
 } from '../../actions/dashboard';
 
 function mapStateToProps(state) {
     const theme = selector.getTheme(state);
     const options = selector.getOptions(state);
     const coinInfo = selector.getCoinInfo(state);
-    const timechartData = selector.getTimechartData(state);
     const selectedOption = selector.getSelectedOption(state);
+    const valueTimechart = selector.getValueTimechart(state);
+    const volumeTimechart = selector.getVolumeTimechart(state);
 
     return {
         theme,
         options,
         coinInfo,
-        timechartData,
         selectedOption,
+        valueTimechart,
+        volumeTimechart,
     };
 }
 
@@ -31,7 +34,8 @@ function mapDispatchToProps(dispatch) {
             {
                 fetchOptions,
                 fetchCoinInfo,
-                fetchTimechartData,
+                fetchValueTimechartData,
+                fetchVolumeTimechartData,
             },
             dispatch,
         ),

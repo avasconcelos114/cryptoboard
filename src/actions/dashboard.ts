@@ -12,8 +12,12 @@ interface FetchCoinInfoAction {
     type: DashboardActionTypes.FETCH_COIN_INFO;
 }
 
-interface FetchTimechartDataAction {
-    type: DashboardActionTypes.FETCH_TIMECHART_DATA;
+interface FetchValueTimechartAction {
+    type: DashboardActionTypes.FETCH_VALUE_TIMECHART;
+}
+
+interface FetchVolumeTimechartAction {
+    type: DashboardActionTypes.FETCH_VOLUME_TIMECHART;
 }
 
 export const fetchOptions: ActionCreator<
@@ -33,7 +37,7 @@ export const fetchOptions: ActionCreator<
             .then(response => {
                 dispatch({
                     type: DashboardActionTypes.FETCH_OPTIONS,
-                    options: response.data.Data,
+                    data: response.data.Data,
                 });
             })
             .catch(error => {
@@ -59,7 +63,7 @@ export const fetchCoinInfo: ActionCreator<
             .then(response => {
                 dispatch({
                     type: DashboardActionTypes.FETCH_COIN_INFO,
-                    coinInfo: response.data.DISPLAY[symbol],
+                    data: response.data.DISPLAY[symbol],
                 });
             })
             .catch(error => {
@@ -68,8 +72,8 @@ export const fetchCoinInfo: ActionCreator<
     };
 };
 
-export const fetchTimechartData: ActionCreator<
-    ThunkAction<Promise<any>, null, null, FetchTimechartDataAction>
+export const fetchValueTimechartData: ActionCreator<
+    ThunkAction<Promise<any>, null, null, FetchValueTimechartAction>
 > = (symbol: string) => {
     return async (dispatch: Dispatch) => {
         const config = {
@@ -84,8 +88,34 @@ export const fetchTimechartData: ActionCreator<
             .get(url, config)
             .then(response => {
                 dispatch({
-                    type: DashboardActionTypes.FETCH_TIMECHART_DATA,
-                    timechartData: response.data.Data,
+                    type: DashboardActionTypes.FETCH_VALUE_TIMECHART,
+                    data: response.data.Data,
+                });
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    };
+};
+
+export const fetchVolumeTimechartData: ActionCreator<
+    ThunkAction<Promise<any>, null, null, FetchVolumeTimechartAction>
+> = (symbol: string) => {
+    return async (dispatch: Dispatch) => {
+        const config = {
+            headers: {
+                authorization: `Bearer ${api.token}`,
+            },
+        };
+
+        let url = `${api.endpoint}/data/exchange/histoday?fsym=${symbol}&tsym=${symbol}&limit=5`;
+
+        await axios
+            .get(url, config)
+            .then(response => {
+                dispatch({
+                    type: DashboardActionTypes.FETCH_VOLUME_TIMECHART,
+                    data: response.data.Data,
                 });
             })
             .catch(error => {

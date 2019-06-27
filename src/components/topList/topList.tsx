@@ -44,11 +44,17 @@ export class TopList extends React.Component<Props> {
         `;
 
         const Title = styled.h1`
-            margin: 50px 0px 0px 50px;
             font-size: 3rem;
             color: ${theme.baseFontColor};
-        `;
 
+            ${breakpoint('mobile')`
+                margin: 20px 0px 0px 20px;
+            `}
+
+            ${breakpoint('tablet')`
+                margin: 50px 0px 0px 50px;
+            `}
+        `;
         const CoinContainer = styled.div`
             margin: 20px 10px 0px 10px;
             display: flex;

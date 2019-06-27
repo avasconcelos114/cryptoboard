@@ -14,6 +14,10 @@ export const getCoinInfo = (store: Store) => {
     return store.dashboard.coinInfo;
 };
 
-export const getTimechartData = (store: Store) => {
-    return store.dashboard.timechartData;
+export const getValueTimechart = (store: Store) => {
+    return store.dashboard.valueTimechart;
 };
+
+export const getVolumeTimechart = (store: Store) => {
+    return store.dashboard.volumeTimechart;
+}

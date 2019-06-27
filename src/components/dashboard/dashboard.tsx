@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
-import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, CartesianGrid, XAxis, YAxis, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 import { Theme } from '../../constants/types';
 
@@ -9,16 +9,18 @@ interface Props {
     theme: Theme;
     selectedOption: string;
     coinInfo: any;
-    timechartData: any;
+    valueTimechart: any;
+    volumeTimechart: any;
     actions: any;
 }
 
 export class Dashboard extends React.Component<Props> {
     public componentDidMount() {
-        const {selectedOption, actions: {fetchOptions, fetchCoinInfo, fetchTimechartData}} = this.props
+        const {selectedOption, actions: {fetchOptions, fetchCoinInfo, fetchValueTimechartData, fetchVolumeTimechartData}} = this.props
         fetchOptions()
         fetchCoinInfo(selectedOption)
-        fetchTimechartData(selectedOption)
+        fetchValueTimechartData(selectedOption)
+        fetchVolumeTimechartData(selectedOption)
     }
 
     public timeConverter = (timestamp: number) => {
@@ -32,8 +34,7 @@ export class Dashboard extends React.Component<Props> {
     }
 
     public render() {
-        const { theme, selectedOption, coinInfo, timechartData } = this.props;
-        console.log(coinInfo)
+        const { theme, selectedOption, coinInfo, valueTimechart, volumeTimechart } = this.props;
         const Container = styled.div`
             width: 100%;
             display: flex;
@@ -55,9 +56,16 @@ export class Dashboard extends React.Component<Props> {
         `;
 
         const Title = styled.h1`
-            margin: 50px 0px 0px 50px;
             font-size: 3rem;
             color: ${theme.baseFontColor};
+
+            ${breakpoint('mobile')`
+                margin: 20px 0px 0px 20px;
+            `}
+
+            ${breakpoint('tablet')`
+                margin: 50px 0px 0px 50px;
+            `}
         `;
 
         const DashboardContents = styled.div`
@@ -124,13 +132,16 @@ export class Dashboard extends React.Component<Props> {
             justify-content: center;
             align-items: center;
 
+            span {
+                color: ${theme.mediumFontColor};
+            }
+
             h2 {
                 font-size: 5rem;
                 font-weight: 500;
-                color: ${theme.newsCategoryBackgrounds[Math.floor(Math.random() * theme.newsCategoryBackgrounds.length)]}
 
                 ${breakpoint('mobile')`
-                    font-size: 5rem;
+                    font-size: 4rem;
                 `}
 
                 ${breakpoint('tablet')`
@@ -143,7 +154,11 @@ export class Dashboard extends React.Component<Props> {
             }
         `;
         
-        timechartData.forEach((data: any) => {
+        valueTimechart.forEach((data: any) => {
+            data.timestamp = this.timeConverter(data.time)
+        })
+
+        volumeTimechart.forEach((data: any) => {
             data.timestamp = this.timeConverter(data.time)
         })
 
@@ -159,39 +174,68 @@ export class Dashboard extends React.Component<Props> {
                                 <h3>{`${selectedOption} - Daily Average`}</h3>
                             </CardHeader>
                             <CardBody>
-                                <h2>{coinInfo.USD.PRICE}</h2>
+                                <h2 style={{color: theme.newsCategoryBackgrounds[Math.floor(Math.random() * theme.newsCategoryBackgrounds.length)]}}>
+                                    {coinInfo.USD.PRICE}
+                                </h2>
                             </CardBody>
                         </Card>
                     </CardContainer>
+
                     <CardContainer>
                         <Card>
                             <CardHeader>
                                 <h3>{`${selectedOption} - Exchange Volume`}</h3>
                             </CardHeader>
                             <CardBody>
-                                <h2>{coinInfo.USD.VOLUMEDAY}</h2>
+                                <h2 style={{color: theme.newsCategoryBackgrounds[Math.floor(Math.random() * theme.newsCategoryBackgrounds.length)]}}>
+                                    {coinInfo.USD.VOLUMEDAY}
+                                </h2>
                             </CardBody>
                         </Card>
                     </CardContainer>
+
                     <CardContainer style={{height: 400}}>
                         <Card>
                             <CardHeader>
                                 <h3>{`${selectedOption} - Value Timechart`}</h3>
                             </CardHeader>
                             <CardBody>
-                                <LineChart width={600} height={300} data={timechartData} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
-                                    <Line type="monotone" dataKey="open" stroke="#26C6DA" activeDot={{ r: 8 }} />
-                                    <Line type="monotone" dataKey="low" stroke="#26A69A" />
-                                    <Line type="monotone" dataKey="high" stroke="#9C27B0" />
-                                    <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-                                    <Tooltip />
-                                    <Legend />
-                                    <XAxis dataKey="timestamp" />
-                                    <YAxis />
-                                </LineChart>
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <LineChart data={valueTimechart} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                                        <Line type="monotone" dataKey="high" stroke="#9C27B0" activeDot={{ r: 8 }}/>
+                                        <Line type="monotone" dataKey="open" stroke="#26C6DA"/>
+                                        <Line type="monotone" dataKey="low" stroke="#26A69A" />
+                                        <CartesianGrid stroke={theme.mediumFontColor} strokeDasharray="5 5" />
+                                        <Tooltip />
+                                        <Legend />
+                                        <XAxis dataKey="timestamp" />
+                                        <YAxis />
+                                    </LineChart>
+                                </ResponsiveContainer>
                             </CardBody>
                         </Card>
                     </CardContainer>
+
+                    <CardContainer style={{height: 400}}>
+                        <Card>
+                            <CardHeader>
+                                <h3>{`${selectedOption} - Volume Timechart`}</h3>
+                            </CardHeader>
+                            <CardBody>
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <LineChart data={volumeTimechart} margin={{ top: 5, right: 20, bottom: 5, left: 0 }}>
+                                        <Line type="monotone" dataKey="volume" stroke="#26C6DA" activeDot={{ r: 8 }} />
+                                        <CartesianGrid stroke={theme.mediumFontColor} strokeDasharray="5 5" />
+                                        <Tooltip />
+                                        <Legend />
+                                        <XAxis dataKey="timestamp" />
+                                        <YAxis />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            </CardBody>
+                        </Card>
+                    </CardContainer>
+
                 </DashboardContents>
             </Container>
         );

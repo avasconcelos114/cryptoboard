@@ -10,7 +10,8 @@ const initialState = {
         }
     },
     exchangeVolume: 0,
-    timechartData: [],
+    valueTimechart: [],
+    volumeTimechart: [],
 };
 
 export default function(state: object = initialState, action: any) {
@@ -18,18 +19,23 @@ export default function(state: object = initialState, action: any) {
         case DashboardActionTypes.FETCH_OPTIONS:
             return {
                 ...state,
-                options: action.options,
+                options: action.data,
             };
         case DashboardActionTypes.FETCH_COIN_INFO:
             return {
                 ...state,
-                coinInfo: action.coinInfo,
+                coinInfo: action.data,
             };
-        case DashboardActionTypes.FETCH_TIMECHART_DATA:
+        case DashboardActionTypes.FETCH_VALUE_TIMECHART:
             return {
                 ...state,
-                timechartData: action.timechartData,
+                valueTimechart: action.data,
             };
+        case DashboardActionTypes.FETCH_VOLUME_TIMECHART:
+            return {
+                ...state,
+                volumeTimechart: action.data,
+            }
         default:
             return state;
     }
