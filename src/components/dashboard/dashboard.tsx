@@ -23,7 +23,20 @@ interface Props {
     actions: any;
 }
 
-export class Dashboard extends React.Component<Props> {
+interface State {
+    priceColor: string;
+    volumeColor: string;
+}
+
+export class Dashboard extends React.Component<Props, State> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            priceColor: this.generateColor(),
+            volumeColor: this.generateColor(),
+        }
+    }
+
     public componentDidMount() {
         const {
             selectedOption,
@@ -40,6 +53,16 @@ export class Dashboard extends React.Component<Props> {
         fetchVolumeTimechartData(selectedOption);
     }
 
+    public generateColor = () => {
+        return this.props.theme.newsCategoryBackgrounds[
+            Math.floor(
+                Math.random() *
+                this.props.theme
+                        .newsCategoryBackgrounds
+                        .length,
+            )
+        ]
+    }
     public timeConverter = (timestamp: number) => {
         const a = new Date(timestamp * 1000);
         const months = [
@@ -92,14 +115,15 @@ export class Dashboard extends React.Component<Props> {
         `;
 
         const Title = styled.h1`
-            font-size: 3rem;
             color: ${theme.baseFontColor};
-
+        
             ${breakpoint('mobile')`
+                font-size: 2.2rem;
                 margin: 20px 0px 0px 20px;
             `}
-
+        
             ${breakpoint('tablet')`
+                font-size: 3rem;
                 margin: 50px 0px 0px 50px;
             `}
         `;
@@ -210,19 +234,7 @@ export class Dashboard extends React.Component<Props> {
                                 <h3>{`${selectedOption} - Daily Average`}</h3>
                             </CardHeader>
                             <CardBody>
-                                <h2
-                                    style={{
-                                        color:
-                                            theme.newsCategoryBackgrounds[
-                                                Math.floor(
-                                                    Math.random() *
-                                                        theme
-                                                            .newsCategoryBackgrounds
-                                                            .length,
-                                                )
-                                            ],
-                                    }}
-                                >
+                                <h2 style={{ color: this.state.priceColor }}>
                                     {coinInfo.USD.PRICE}
                                 </h2>
                             </CardBody>
@@ -235,20 +247,8 @@ export class Dashboard extends React.Component<Props> {
                                 <h3>{`${selectedOption} - Exchange Volume`}</h3>
                             </CardHeader>
                             <CardBody>
-                                <h2
-                                    style={{
-                                        color:
-                                            theme.newsCategoryBackgrounds[
-                                                Math.floor(
-                                                    Math.random() *
-                                                        theme
-                                                            .newsCategoryBackgrounds
-                                                            .length,
-                                                )
-                                            ],
-                                    }}
-                                >
-                                    {coinInfo.USD.VOLUMEDAY}
+                                <h2 style={{ color: this.state.volumeColor }}>
+                                    {coinInfo.USD.VOLUME24HOUR}
                                 </h2>
                             </CardBody>
                         </Card>
@@ -318,7 +318,7 @@ export class Dashboard extends React.Component<Props> {
                                     >
                                         <Line
                                             type="monotone"
-                                            dataKey="volume"
+                                            dataKey="volumefrom"
                                             stroke="#26C6DA"
                                             activeDot={{ r: 8 }}
                                         />

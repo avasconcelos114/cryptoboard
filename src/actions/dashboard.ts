@@ -108,7 +108,7 @@ export const fetchVolumeTimechartData: ActionCreator<
             },
         };
 
-        let url = `${api.endpoint}/data/exchange/histoday?fsym=${symbol}&tsym=${symbol}&limit=5`;
+        let url = `${api.endpoint}/data/histoday?fsym=${symbol}&tsym=USD&limit=5`;
 
         await axios
             .get(url, config)

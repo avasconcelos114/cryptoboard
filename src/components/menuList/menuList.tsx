@@ -61,6 +61,7 @@ export class MenuList extends React.PureComponent<Props> {
             menuElements.push(
                 <MenuItem key={menu.route}>
                     <MenuImage
+                        alt={`${menu.route}_icon.png`}
                         src={`${process.env.PUBLIC_URL}/assets/img/${menu.route}_icon.png`}
                     />
                     <Link
