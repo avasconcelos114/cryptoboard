@@ -30,6 +30,28 @@
           display: flex;
           font-family: 'Roboto', sans-serif;
       }
+
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+
+      /* Track */
+      ::-webkit-scrollbar-track {
+        background: rgba(100, 100, 100, 0.4); 
+        border-radius: 5px;
+      }
+      
+      /* Handle */
+      ::-webkit-scrollbar-thumb {
+        background: rgba(100, 100, 100, 0.4); 
+        border-radius: 5px;
+        transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+      }
+
+      /* Handle on hover */
+      ::-webkit-scrollbar-thumb:hover {
+        background: rgba(100, 100, 100, 0.7);  
+      }
     </style>
   </head>
   <body>
