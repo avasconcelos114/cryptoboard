@@ -29,12 +29,12 @@ interface State {
 }
 
 export class Dashboard extends React.Component<Props, State> {
-    constructor(props: any) {
+    public constructor(props: any) {
         super(props);
         this.state = {
             priceColor: this.generateColor(),
             volumeColor: this.generateColor(),
-        }
+        };
     }
 
     public componentDidMount() {
@@ -56,13 +56,11 @@ export class Dashboard extends React.Component<Props, State> {
     public generateColor = () => {
         return this.props.theme.newsCategoryBackgrounds[
             Math.floor(
-                Math.random() *
-                this.props.theme
-                        .newsCategoryBackgrounds
-                        .length,
+                Math.random() * this.props.theme.newsCategoryBackgrounds.length,
             )
-        ]
-    }
+        ];
+    };
+
     public timeConverter = (timestamp: number) => {
         const a = new Date(timestamp * 1000);
         const months = [
@@ -94,6 +92,7 @@ export class Dashboard extends React.Component<Props, State> {
             valueTimechart,
             volumeTimechart,
         } = this.props;
+
         const Container = styled.div`
             width: 100%;
             display: flex;
@@ -116,12 +115,12 @@ export class Dashboard extends React.Component<Props, State> {
 
         const Title = styled.h1`
             color: ${theme.baseFontColor};
-        
+
             ${breakpoint('mobile')`
                 font-size: 2.2rem;
                 margin: 20px 0px 0px 20px;
             `}
-        
+
             ${breakpoint('tablet')`
                 font-size: 3rem;
                 margin: 50px 0px 0px 50px;

@@ -25,6 +25,7 @@ export interface News {
     categories: string;
     upvotes: string;
     downvotes: string;
+    body: string;
 }
 
 // Note: The API source is inconsistent with casing of variables returned
