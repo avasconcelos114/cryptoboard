@@ -18,7 +18,6 @@
   * Responsive layouts (breakpoints)
   * Dynamic themes
   * Animations (with zdog and gsap libraries)
-  * Server-side Rendering (TODO)
 * Dev Env
   * Docker
   * ESLint
@@ -48,9 +47,10 @@ docker run -d -p 80:80 --name cryptoboard cryptoboard
 ```
 
 #### TODOs:
-* Add Server-side rendering
 * Refactor loading screen to cover each individual card or feed section
 * Try to fix issue with components re-mounting when theme changes
+* Split dashboard into several chart-based components
+* Find way to virtualize news and top coin as grid (despite their data being list-like)
   
 #### Credits  
 <div>

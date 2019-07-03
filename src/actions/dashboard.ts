@@ -20,6 +20,10 @@ interface FetchVolumeTimechartAction {
     type: DashboardActionTypes.FETCH_VOLUME_TIMECHART;
 }
 
+interface ChangeOptionAction {
+    type: DashboardActionTypes.CHANGE_OPTION;
+}
+
 export const fetchOptions: ActionCreator<
     ThunkAction<Promise<any>, null, null, FetchOptionsAction>
 > = () => {
@@ -121,5 +125,16 @@ export const fetchVolumeTimechartData: ActionCreator<
             .catch(error => {
                 console.log(error);
             });
+    };
+};
+
+export const changeOption: ActionCreator<
+    ThunkAction<Promise<any>, null, null, ChangeOptionAction>
+> = (option: string) => {
+    return async (dispatch: Dispatch) => {
+        dispatch({
+            type: DashboardActionTypes.CHANGE_OPTION,
+            data: option,
+        });
     };
 };

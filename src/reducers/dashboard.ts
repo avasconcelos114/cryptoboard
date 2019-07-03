@@ -36,6 +36,11 @@ export default function(state: object = initialState, action: any) {
                 ...state,
                 volumeTimechart: action.data,
             };
+        case DashboardActionTypes.CHANGE_OPTION:
+            return {
+                ...state,
+                selectedOption: action.data,
+            }
         default:
             return state;
     }

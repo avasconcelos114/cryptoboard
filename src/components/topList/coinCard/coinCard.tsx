@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 import breakpoint from 'styled-components-breakpoint';
 import { Power3, TweenLite } from 'gsap';
 import { Theme, Coin } from '../../../constants/types';
@@ -8,6 +9,7 @@ interface Props {
     index: number;
     theme: Theme;
     coin: Coin;
+    actions: any;
 }
 
 export class CoinCard extends React.Component<Props> {
@@ -19,6 +21,11 @@ export class CoinCard extends React.Component<Props> {
             TweenLite.to(target, 0, { width: '100%', ease: Power3.easeOut });
             TweenLite.to(target, 0, { height: '100%', ease: Power3.easeOut });
         }, this.props.index * 50);
+    }
+
+    public openDashboard = () => {
+        const { actions: { changeOption }, coin } = this.props;
+        changeOption(coin.CoinInfo.Name);
     }
 
     public render() {
@@ -117,32 +124,34 @@ export class CoinCard extends React.Component<Props> {
         return (
             <Container>
                 <Card id={`coin_${coin.CoinInfo.Id}`}>
-                    <CardHeader>
-                        <h3>{`${index + 1}. ${coin.CoinInfo.FullName}`}</h3>
-                        <Image
-                            src={`https://cryptocompare.com${coin.CoinInfo.ImageUrl}`}
-                        />
-                    </CardHeader>
-                    <CardBody>
-                        <Price>
-                            {`Price: `} <span>{coin.DISPLAY.USD.PRICE}</span>
-                        </Price>
-                        <CoinInfo>
-                            <span style={{ color: '#4CAF50' }}>{'▲ '}</span>
-                            <span>{coin.DISPLAY.USD.HIGHDAY}</span>
+                    <Link style={{ textDecoration: 'none' }} onClick={this.openDashboard} to={'/dashboard'}>
+                        <CardHeader>
+                            <h3>{`${index + 1}. ${coin.CoinInfo.FullName}`}</h3>
+                            <Image
+                                src={`https://cryptocompare.com${coin.CoinInfo.ImageUrl}`}
+                            />
+                        </CardHeader>
+                        <CardBody>
+                            <Price>
+                                {`Price: `} <span>{coin.DISPLAY.USD.PRICE}</span>
+                            </Price>
+                            <CoinInfo>
+                                <span style={{ color: '#4CAF50' }}>{'▲ '}</span>
+                                <span>{coin.DISPLAY.USD.HIGHDAY}</span>
 
-                            <span style={{ color: '#D32F2F' }}>{' ▼ '}</span>
-                            <span>{coin.DISPLAY.USD.LOWDAY}</span>
-                        </CoinInfo>
-                        <CoinInfo>
-                            {'24H Volume: '}{' '}
-                            <span>{coin.DISPLAY.USD.VOLUMEDAY}</span>
-                        </CoinInfo>
-                        <CoinInfo>
-                            {'Market Cap: '}{' '}
-                            <span>{coin.DISPLAY.USD.MKTCAP}</span>
-                        </CoinInfo>
-                    </CardBody>
+                                <span style={{ color: '#D32F2F' }}>{' ▼ '}</span>
+                                <span>{coin.DISPLAY.USD.LOWDAY}</span>
+                            </CoinInfo>
+                            <CoinInfo>
+                                {'24H Volume: '}{' '}
+                                <span>{coin.DISPLAY.USD.VOLUMEDAY}</span>
+                            </CoinInfo>
+                            <CoinInfo>
+                                {'Market Cap: '}{' '}
+                                <span>{coin.DISPLAY.USD.MKTCAP}</span>
+                            </CoinInfo>
+                        </CardBody>
+                    </Link>
                 </Card>
             </Container>
         );
