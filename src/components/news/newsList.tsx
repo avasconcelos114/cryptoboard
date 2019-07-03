@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
-import { Scrollbars } from 'react-custom-scrollbars';
-import { List, AutoSizer } from "react-virtualized";
+import { List, AutoSizer } from 'react-virtualized';
 import { Theme, News } from '../../constants/types';
 
 interface Props {
@@ -34,7 +33,7 @@ export class NewsList extends React.Component<Props> {
     // @ts-ignore
     public renderCard = ({ index, key, style }) => {
         const { theme, newsList } = this.props;
-        const item = newsList[index]
+        const item = newsList[index];
         const categories = item.categories.split('|');
 
         const Container = styled.div`
@@ -152,8 +151,11 @@ export class NewsList extends React.Component<Props> {
         });
 
         return (
-            <Container key={key} style={style} >
-                <Card onClick={() => this.openUrl(item.url)} id={`news_${item.id}`}>
+            <Container key={key} style={style}>
+                <Card
+                    onClick={() => this.openUrl(item.url)}
+                    id={`news_${item.id}`}
+                >
                     <Image />
                     <InfoContainer>
                         <Title>{item.title}</Title>
@@ -164,8 +166,8 @@ export class NewsList extends React.Component<Props> {
                     </CategoriesContainer>
                 </Card>
             </Container>
-        )
-    }
+        );
+    };
 
     public render() {
         const { theme, newsList } = this.props;
@@ -191,12 +193,12 @@ export class NewsList extends React.Component<Props> {
 
         const Title = styled.h1`
             color: ${theme.baseFontColor};
-        
+
             ${breakpoint('mobile')`
                 font-size: 2.2rem;
                 margin: 20px 0px 0px 20px;
             `}
-        
+
             ${breakpoint('tablet')`
                 font-size: 3rem;
                 margin: 50px 0px 0px 50px;
@@ -218,23 +220,21 @@ export class NewsList extends React.Component<Props> {
                 <TitleContainer>
                     <Title>{'News'}</Title>
                 </TitleContainer>
-                    <NewsContainer>
-                        <AutoSizer >
-                            {
-                                // @ts-ignore
-                                ({ height, width }) => (
-                                <List
-                                    height={height}
-                                    rowCount={newsList.length}
-                                    rowHeight={370}
-                                    rowRenderer={this.renderCard}
-                                    width={width}
-                                    style={{outline: 'none'}}
-                                />
-                                )
-                            }
-                        </AutoSizer>
-                    </NewsContainer>
+                <NewsContainer>
+                    <AutoSizer>
+                        {// @ts-ignore
+                        ({ height, width }) => (
+                            <List
+                                height={height}
+                                rowCount={newsList.length}
+                                rowHeight={370}
+                                rowRenderer={this.renderCard}
+                                width={width}
+                                style={{ outline: 'none' }}
+                            />
+                        )}
+                    </AutoSizer>
+                </NewsContainer>
             </Container>
         );
     }

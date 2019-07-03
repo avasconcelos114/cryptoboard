@@ -45,12 +45,12 @@ export class TopList extends React.Component<Props> {
 
         const Title = styled.h1`
             color: ${theme.baseFontColor};
-        
+
             ${breakpoint('mobile')`
                 font-size: 2.2rem;
                 margin: 20px 0px 0px 20px;
             `}
-        
+
             ${breakpoint('tablet')`
                 font-size: 3rem;
                 margin: 50px 0px 0px 50px;
