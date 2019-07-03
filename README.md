@@ -51,7 +51,8 @@ docker run -d -p 80:80 --name cryptoboard cryptoboard
 * Add Server-side rendering
 * Refactor loading screen to cover each individual card or feed section
 * Try to fix issue with components re-mounting when theme changes
-Credits
+  
+#### Credits  
 <div>
   Icons made by 
   <a href="https://www.flaticon.com/authors/eucalyp" title="Eucalyp">Eucalyp</a>
