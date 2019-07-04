@@ -24,9 +24,12 @@ export class CoinCard extends React.Component<Props> {
     }
 
     public openDashboard = () => {
-        const { actions: { changeOption }, coin } = this.props;
+        const {
+            actions: { changeOption },
+            coin,
+        } = this.props;
         changeOption(coin.CoinInfo.Name);
-    }
+    };
 
     public render() {
         const { theme, coin, index } = this.props;
@@ -124,7 +127,11 @@ export class CoinCard extends React.Component<Props> {
         return (
             <Container>
                 <Card id={`coin_${coin.CoinInfo.Id}`}>
-                    <Link style={{ textDecoration: 'none' }} onClick={this.openDashboard} to={'/dashboard'}>
+                    <Link
+                        style={{ textDecoration: 'none' }}
+                        onClick={this.openDashboard}
+                        to={'/dashboard'}
+                    >
                         <CardHeader>
                             <h3>{`${index + 1}. ${coin.CoinInfo.FullName}`}</h3>
                             <Image
@@ -133,13 +140,16 @@ export class CoinCard extends React.Component<Props> {
                         </CardHeader>
                         <CardBody>
                             <Price>
-                                {`Price: `} <span>{coin.DISPLAY.USD.PRICE}</span>
+                                {`Price: `}{' '}
+                                <span>{coin.DISPLAY.USD.PRICE}</span>
                             </Price>
                             <CoinInfo>
                                 <span style={{ color: '#4CAF50' }}>{'▲ '}</span>
                                 <span>{coin.DISPLAY.USD.HIGHDAY}</span>
 
-                                <span style={{ color: '#D32F2F' }}>{' ▼ '}</span>
+                                <span style={{ color: '#D32F2F' }}>
+                                    {' ▼ '}
+                                </span>
                                 <span>{coin.DISPLAY.USD.LOWDAY}</span>
                             </CoinInfo>
                             <CoinInfo>

@@ -40,7 +40,7 @@ export default function(state: object = initialState, action: any) {
             return {
                 ...state,
                 selectedOption: action.data,
-            }
+            };
         default:
             return state;
     }

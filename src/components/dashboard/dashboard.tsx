@@ -103,8 +103,8 @@ export class Dashboard extends React.Component<Props, State> {
     };
 
     public handleOnChange = (event: any) => {
-        this.props.actions.changeOption(event.target.value)
-    }
+        this.props.actions.changeOption(event.target.value);
+    };
 
     public render() {
         const {
@@ -163,7 +163,6 @@ export class Dashboard extends React.Component<Props, State> {
             border-radius: 4px;
             box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
                 0 1px 2px rgba(0, 0, 0, 0.24);
-            
 
             option {
                 background: #fff;
@@ -242,6 +241,7 @@ export class Dashboard extends React.Component<Props, State> {
 
             h2 {
                 font-weight: 500;
+                margin: 0;
 
                 ${breakpoint('mobile')`
                     font-size: 10vw;
@@ -261,26 +261,26 @@ export class Dashboard extends React.Component<Props, State> {
             data.timestamp = this.timeConverter(data.time);
         });
 
-        const optionsElements: any[] = []
+        const optionsElements: any[] = [];
         optionsElements.push(
-            <option value={selectedOption}>
-                {selectedOption}
-            </option>
+            <option value={selectedOption}>{selectedOption}</option>,
         );
 
         options.forEach((option: any) => {
-            if(selectedOption !== option.CoinInfo.Name) {
+            if (selectedOption !== option.CoinInfo.Name) {
                 optionsElements.push(
-                    <option value={option.CoinInfo.Name}>{option.CoinInfo.Name}</option>
-                )
+                    <option value={option.CoinInfo.Name}>
+                        {option.CoinInfo.Name}
+                    </option>,
+                );
             }
-        })
+        });
 
         return (
             <Container>
                 <TitleContainer>
                     <Title>{'Dashboard'}</Title>
-                    <Dropdown onChange={(e) => this.handleOnChange(e)}>
+                    <Dropdown onChange={e => this.handleOnChange(e)}>
                         {optionsElements}
                     </Dropdown>
                 </TitleContainer>
