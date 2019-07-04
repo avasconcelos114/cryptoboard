@@ -18,6 +18,7 @@ interface Props {
     theme: Theme;
     selectedOption: string;
     coinInfo: any;
+    options: any;
     valueTimechart: any;
     volumeTimechart: any;
     actions: any;
@@ -53,6 +54,23 @@ export class Dashboard extends React.Component<Props, State> {
         fetchVolumeTimechartData(selectedOption);
     }
 
+    public componentWillReceiveProps(nextProps: any) {
+        const {
+            selectedOption,
+            actions: {
+                fetchCoinInfo,
+                fetchValueTimechartData,
+                fetchVolumeTimechartData,
+            },
+        } = this.props;
+
+        if (selectedOption !== nextProps.selectedOption) {
+            fetchCoinInfo(nextProps.selectedOption);
+            fetchValueTimechartData(nextProps.selectedOption);
+            fetchVolumeTimechartData(nextProps.selectedOption);
+        }
+    }
+
     public generateColor = () => {
         return this.props.theme.newsCategoryBackgrounds[
             Math.floor(
@@ -84,11 +102,16 @@ export class Dashboard extends React.Component<Props, State> {
         return time;
     };
 
+    public handleOnChange = (event: any) => {
+        this.props.actions.changeOption(event.target.value)
+    }
+
     public render() {
         const {
             theme,
             selectedOption,
             coinInfo,
+            options,
             valueTimechart,
             volumeTimechart,
         } = this.props;
@@ -111,20 +134,41 @@ export class Dashboard extends React.Component<Props, State> {
             width: 100%;
             display: flex;
             flex-direction: row;
+            justify-content: center;
+            align-items: center;
         `;
 
         const Title = styled.h1`
             color: ${theme.baseFontColor};
+            margin-left: 20px;
 
             ${breakpoint('mobile')`
                 font-size: 2.2rem;
-                margin: 20px 0px 0px 20px;
             `}
 
             ${breakpoint('tablet')`
                 font-size: 3rem;
-                margin: 50px 0px 0px 50px;
             `}
+        `;
+
+        const Dropdown = styled.select`
+            margin-left: auto;
+            margin-right: 20px;
+            color: ${theme.mediumFontColor};
+            height: 35px;
+            width: 100px;
+            background: ${theme.cardBackground};
+            padding: 5px;
+            border: 1px solid ${theme.cardLineColor};
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+                0 1px 2px rgba(0, 0, 0, 0.24);
+            
+
+            option {
+                background: #fff;
+                color: #000;
+            }
         `;
 
         const DashboardContents = styled.div`
@@ -173,6 +217,7 @@ export class Dashboard extends React.Component<Props, State> {
             flex-direction: row;
             align-items: center;
             height: 60px;
+            min-height: 60px;
             border-bottom: 1px solid ${theme.cardLineColor};
 
             h3 {
@@ -196,19 +241,14 @@ export class Dashboard extends React.Component<Props, State> {
             }
 
             h2 {
-                font-size: 5rem;
                 font-weight: 500;
 
                 ${breakpoint('mobile')`
-                    font-size: 4rem;
+                    font-size: 10vw;
                 `}
 
                 ${breakpoint('tablet')`
-                    font-size: 3rem;
-                `}
-
-                ${breakpoint('desktop')`
-                    font-size: 5rem;
+                    font-size: 6vw;
                 `}
             }
         `;
@@ -221,10 +261,28 @@ export class Dashboard extends React.Component<Props, State> {
             data.timestamp = this.timeConverter(data.time);
         });
 
+        const optionsElements: any[] = []
+        optionsElements.push(
+            <option value={selectedOption}>
+                {selectedOption}
+            </option>
+        );
+
+        options.forEach((option: any) => {
+            if(selectedOption !== option.CoinInfo.Name) {
+                optionsElements.push(
+                    <option value={option.CoinInfo.Name}>{option.CoinInfo.Name}</option>
+                )
+            }
+        })
+
         return (
             <Container>
                 <TitleContainer>
                     <Title>{'Dashboard'}</Title>
+                    <Dropdown onChange={(e) => this.handleOnChange(e)}>
+                        {optionsElements}
+                    </Dropdown>
                 </TitleContainer>
                 <DashboardContents>
                     <CardContainer>

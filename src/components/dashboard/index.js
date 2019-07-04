@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import Dashboard from './dashboard';
 import selector from '../../selectors';
 import {
+    changeOption,
     fetchOptions,
     fetchCoinInfo,
     fetchValueTimechartData,
@@ -32,6 +33,7 @@ function mapDispatchToProps(dispatch) {
     return {
         actions: bindActionCreators(
             {
+                changeOption,
                 fetchOptions,
                 fetchCoinInfo,
                 fetchValueTimechartData,

@@ -5,7 +5,6 @@ import { Theme } from '../../constants/types';
 
 import Sidebar from '../sidebar';
 import Header from '../header';
-import Loading from '../loading';
 
 import Dashboard from '../dashboard';
 import TopList from '../topList';
@@ -37,7 +36,6 @@ export class Root extends React.Component<Props> {
 
         return (
             <AppContainer className="App">
-                <Loading />
                 <Sidebar />
                 <MainViewContainer>
                     <Header />
