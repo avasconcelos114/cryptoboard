@@ -11,7 +11,7 @@ import {
     Legend,
     ResponsiveContainer,
 } from 'recharts';
-
+import Card from '../card';
 import { Theme } from '../../constants/types';
 
 interface Props {
@@ -188,71 +188,37 @@ export class Dashboard extends React.Component<Props, State> {
             justify-content: center;
             align-items: center;
 
+            
             ${breakpoint('mobile')`
-                width: 100%;
+            width: 100%;
             `}
-
+            
             ${breakpoint('tablet')`
-                width: calc(50% - 20px);
+            width: calc(50% - 20px);
             `}
-        `;
-
-        const Card = styled.div`
-            display: flex;
-            overflow: hidden;
-            height: 100%;
-            width: 100%;
-            background: #fff;
-            flex-direction: column;
-            border-radius: 4px;
-            background: ${theme.cardBackground};
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
-                0 1px 2px rgba(0, 0, 0, 0.24);
-            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        `;
-
-        const CardHeader = styled.div`
-            display: flex;
-            flex-direction: row;
-            align-items: center;
-            height: 60px;
-            min-height: 60px;
-            border-bottom: 1px solid ${theme.cardLineColor};
-
-            h3 {
-                font-size: 1.5rem;
-                font-weight: 300;
-                display: flex;
-                margin: 0 10px;
-                color: ${theme.baseFontColor};
-            }
-        `;
-
-        const CardBody = styled.div`
-            display: flex;
-            height: 100%;
-            width: 100%;
-            justify-content: center;
-            align-items: center;
 
             .recharts-legend-item-text {
                 color: ${theme.mediumFontColor};
             }
-
-            h2 {
-                font-weight: 500;
-                margin: 0;
-
-                ${breakpoint('mobile')`
-                    font-size: 10vw;
-                `}
-
-                ${breakpoint('tablet')`
-                    font-size: 6vw;
-                `}
-            }
         `;
 
+        const ValueTag = styled.h2`
+            font-weight: 500;
+            margin: 0;
+            display: flex;
+            height: 100%;
+            justify-content: center;
+            align-items: center;
+
+            ${breakpoint('mobile')`
+                font-size: 10vw;
+            `}
+
+            ${breakpoint('tablet')`
+                font-size: 6vw;
+            `}
+        `;
+        
         valueTimechart.forEach((data: any) => {
             data.timestamp = this.timeConverter(data.time);
         });
@@ -286,110 +252,102 @@ export class Dashboard extends React.Component<Props, State> {
                 </TitleContainer>
                 <DashboardContents>
                     <CardContainer>
-                        <Card>
-                            <CardHeader>
-                                <h3>{`${selectedOption} - Daily Average`}</h3>
-                            </CardHeader>
-                            <CardBody>
-                                <h2 style={{ color: this.state.priceColor }}>
-                                    {coinInfo.USD.PRICE}
-                                </h2>
-                            </CardBody>
+                        <Card
+                            theme={theme}
+                            title={`${selectedOption} - Daily Average`}
+                        >
+                            <ValueTag style={{ color: this.state.priceColor }}>
+                                {coinInfo.USD.PRICE}
+                            </ValueTag>
                         </Card>
                     </CardContainer>
 
                     <CardContainer>
-                        <Card>
-                            <CardHeader>
-                                <h3>{`${selectedOption} - Exchange Volume`}</h3>
-                            </CardHeader>
-                            <CardBody>
-                                <h2 style={{ color: this.state.volumeColor }}>
-                                    {coinInfo.USD.VOLUME24HOUR}
-                                </h2>
-                            </CardBody>
+                        <Card
+                            theme={theme}
+                            title={`${selectedOption} - Exchange Volume`}
+                        >
+                            <ValueTag style={{ color: this.state.volumeColor }}>
+                                {coinInfo.USD.VOLUME24HOUR}
+                            </ValueTag>
                         </Card>
                     </CardContainer>
 
                     <CardContainer style={{ height: 400 }}>
-                        <Card>
-                            <CardHeader>
-                                <h3>{`${selectedOption} - Value Timechart`}</h3>
-                            </CardHeader>
-                            <CardBody>
-                                <ResponsiveContainer width="100%" height={300}>
-                                    <LineChart
-                                        data={valueTimechart}
-                                        margin={{
-                                            top: 5,
-                                            right: 20,
-                                            bottom: 5,
-                                            left: 0,
-                                        }}
-                                    >
-                                        <Line
-                                            type="monotone"
-                                            dataKey="high"
-                                            stroke="#9C27B0"
-                                            activeDot={{ r: 8 }}
-                                        />
-                                        <Line
-                                            type="monotone"
-                                            dataKey="open"
-                                            stroke="#26C6DA"
-                                        />
-                                        <Line
-                                            type="monotone"
-                                            dataKey="low"
-                                            stroke="#26A69A"
-                                        />
-                                        <CartesianGrid
-                                            stroke={theme.mediumFontColor}
-                                            strokeDasharray="5 5"
-                                        />
-                                        <Tooltip />
-                                        <Legend />
-                                        <XAxis dataKey="timestamp" />
-                                        <YAxis />
-                                    </LineChart>
-                                </ResponsiveContainer>
-                            </CardBody>
+                        <Card
+                            theme={theme}
+                            title={`${selectedOption} - Value Timechart`}
+                        >
+                            <ResponsiveContainer width="100%" height={300}>
+                                <LineChart
+                                    data={valueTimechart}
+                                    margin={{
+                                        top: 5,
+                                        right: 20,
+                                        bottom: 5,
+                                        left: 0,
+                                    }}
+                                >
+                                    <Line
+                                        type="monotone"
+                                        dataKey="high"
+                                        stroke="#9C27B0"
+                                        activeDot={{ r: 8 }}
+                                    />
+                                    <Line
+                                        type="monotone"
+                                        dataKey="open"
+                                        stroke="#26C6DA"
+                                    />
+                                    <Line
+                                        type="monotone"
+                                        dataKey="low"
+                                        stroke="#26A69A"
+                                    />
+                                    <CartesianGrid
+                                        stroke={theme.mediumFontColor}
+                                        strokeDasharray="5 5"
+                                    />
+                                    <Tooltip />
+                                    <Legend />
+                                    <XAxis dataKey="timestamp" />
+                                    <YAxis />
+                                </LineChart>
+                            </ResponsiveContainer>
                         </Card>
                     </CardContainer>
 
                     <CardContainer style={{ height: 400 }}>
-                        <Card>
-                            <CardHeader>
-                                <h3>{`${selectedOption} - Volume Timechart`}</h3>
-                            </CardHeader>
-                            <CardBody>
-                                <ResponsiveContainer width="100%" height={300}>
-                                    <LineChart
-                                        data={volumeTimechart}
-                                        margin={{
-                                            top: 5,
-                                            right: 20,
-                                            bottom: 5,
-                                            left: 0,
-                                        }}
-                                    >
-                                        <Line
-                                            type="monotone"
-                                            dataKey="volumefrom"
-                                            stroke="#26C6DA"
-                                            activeDot={{ r: 8 }}
-                                        />
-                                        <CartesianGrid
-                                            stroke={theme.mediumFontColor}
-                                            strokeDasharray="5 5"
-                                        />
-                                        <Tooltip />
-                                        <Legend />
-                                        <XAxis dataKey="timestamp" />
-                                        <YAxis />
-                                    </LineChart>
-                                </ResponsiveContainer>
-                            </CardBody>
+                        <Card
+                            theme={theme}
+                            title={`${selectedOption} - Volume Timechart`}
+                        >
+                            <ResponsiveContainer width="100%" height={300}>
+                                <LineChart
+                                    data={volumeTimechart}
+                                    margin={{
+                                        top: 5,
+                                        right: 20,
+                                        bottom: 5,
+                                        left: 0,
+                                    }}
+                                >
+                                    <Line
+                                        type="monotone"
+                                        dataKey="volumefrom"
+                                        stroke="#26C6DA"
+                                        activeDot={{ r: 8 }}
+                                    />
+                                    <CartesianGrid
+                                        stroke={theme.mediumFontColor}
+                                        strokeDasharray="5 5"
+                                    />
+                                    <Tooltip />
+                                    <Legend />
+                                    <XAxis dataKey="timestamp" />
+                                    <YAxis />
+                                </LineChart>
+                            </ResponsiveContainer>
                         </Card>
                     </CardContainer>
                 </DashboardContents>
