@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.js": "/cryptoboard/static/js/main.f30745f8.chunk.js",
-    "main.js.map": "/cryptoboard/static/js/main.f30745f8.chunk.js.map",
+    "main.js": "/cryptoboard/static/js/main.65e3ab59.chunk.js",
+    "main.js.map": "/cryptoboard/static/js/main.65e3ab59.chunk.js.map",
     "runtime~main.js": "/cryptoboard/static/js/runtime~main.117c916a.js",
     "runtime~main.js.map": "/cryptoboard/static/js/runtime~main.117c916a.js.map",
     "static/js/2.bb29a1fd.chunk.js": "/cryptoboard/static/js/2.bb29a1fd.chunk.js",
     "static/js/2.bb29a1fd.chunk.js.map": "/cryptoboard/static/js/2.bb29a1fd.chunk.js.map",
     "index.html": "/cryptoboard/index.html",
-    "precache-manifest.7ca545e162045698f005cba3d040dc65.js": "/cryptoboard/precache-manifest.7ca545e162045698f005cba3d040dc65.js",
+    "precache-manifest.b2f653bcf689a849d818a48542defb92.js": "/cryptoboard/precache-manifest.b2f653bcf689a849d818a48542defb92.js",
     "service-worker.js": "/cryptoboard/service-worker.js"
   }
 }
