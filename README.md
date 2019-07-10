@@ -30,12 +30,14 @@
 npm install
 npm start
 ```
+
 #### Running with Docker
 0. Build app
 ```
 npm install
 npm run build
 ```
+
 1. Build image
 ```
 docker build -t cryptoboard .

@@ -3,21 +3,33 @@ import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
 import { Theme, Coin } from '../../constants/types';
 import CoinCard from './coinCard';
+import Loading from '../loading';
+
 interface Props {
     theme: Theme;
     actions: any;
     topList: Coin[];
 }
 
-export class TopList extends React.Component<Props> {
+interface State {
+    isLoading: boolean;
+}
+export class TopList extends React.Component<Props, State> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            isLoading: false,
+        }
+    }
+
     public componentDidMount() {
-        this.props.actions.openLoadingScreen();
+        this.setState({ isLoading: true });
         this.props.actions.fetchTopList();
     }
 
     public componentWillReceiveProps(nextProps: any) {
         if (nextProps.topList.length > 0) {
-            this.props.actions.closeLoadingScreen();
+            this.setState({ isLoading: false });
         }
     }
 
@@ -74,7 +86,10 @@ export class TopList extends React.Component<Props> {
                 <TitleContainer>
                     <Title>{'Top Coins'}</Title>
                 </TitleContainer>
-                <CoinContainer>{coins}</CoinContainer>
+                <CoinContainer>
+                    <Loading theme={theme} id={'top_coins_loading'} isLoading={this.state.isLoading} />
+                    {coins}
+                </CoinContainer>
             </Container>
         );
     }

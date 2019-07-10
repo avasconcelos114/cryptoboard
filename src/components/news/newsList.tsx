@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import breakpoint from 'styled-components-breakpoint';
 import { List, AutoSizer } from 'react-virtualized';
 import { Theme, News } from '../../constants/types';
+import Loading from '../loading';
 
 interface Props {
     theme: Theme;
@@ -10,15 +11,25 @@ interface Props {
     actions: any;
 }
 
-export class NewsList extends React.Component<Props> {
+interface State {
+    isLoading: boolean;
+}
+
+export class NewsList extends React.Component<Props, State> {
+    constructor(props: any) {
+        super(props);
+        this.state = {
+            isLoading: false,
+        }
+    }
     public componentDidMount() {
-        this.props.actions.openLoadingScreen();
+        this.setState({ isLoading: true });
         this.props.actions.fetchNews();
     }
 
     public componentWillReceiveProps(nextProps: any) {
         if (nextProps.newsList.length > 0) {
-            this.props.actions.closeLoadingScreen();
+            this.setState({ isLoading: false });
         }
     }
 
@@ -152,6 +163,7 @@ export class NewsList extends React.Component<Props> {
 
         return (
             <Container key={key} style={style}>
+                
                 <Card
                     onClick={() => this.openUrl(item.url)}
                     id={`news_${item.id}`}
@@ -221,6 +233,7 @@ export class NewsList extends React.Component<Props> {
                     <Title>{'News'}</Title>
                 </TitleContainer>
                 <NewsContainer>
+                    <Loading theme={theme} id={'loading_news'} isLoading={this.state.isLoading}/>
                     <AutoSizer>
                         {// @ts-ignore
                         ({ height, width }) => (

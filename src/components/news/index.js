@@ -2,7 +2,6 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 
 import { fetchNews } from '../../actions/news';
-import { openLoadingScreen, closeLoadingScreen } from '../../actions/common';
 import NewsList from './newsList';
 import selector from '../../selectors';
 
@@ -20,8 +19,6 @@ function mapDispatchToProps(dispatch) {
         actions: bindActionCreators(
             {
                 fetchNews,
-                openLoadingScreen,
-                closeLoadingScreen,
             },
             dispatch,
         ),

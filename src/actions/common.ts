@@ -10,14 +10,6 @@ interface CloseSidebarAction {
     type: CommonActionTypes.CLOSE_SIDEBAR;
 }
 
-interface OpenLoadingAction {
-    type: CommonActionTypes.TOGGLE_LOADING_OPEN;
-}
-
-interface CloseLoadingAction {
-    type: CommonActionTypes.TOGGLE_LOADING_CLOSED;
-}
-
 interface ToggleThemeAction {
     type: CommonActionTypes.TOGGLE_THEME;
 }
@@ -38,26 +30,6 @@ export const closeSidebar: ActionCreator<
     return async (dispatch: Dispatch) => {
         dispatch({
             type: CommonActionTypes.CLOSE_SIDEBAR,
-        });
-    };
-};
-
-export const openLoadingScreen: ActionCreator<
-    ThunkAction<Promise<any>, null, null, OpenLoadingAction>
-> = () => {
-    return async (dispatch: Dispatch) => {
-        dispatch({
-            type: CommonActionTypes.TOGGLE_LOADING_OPEN,
-        });
-    };
-};
-
-export const closeLoadingScreen: ActionCreator<
-    ThunkAction<Promise<any>, null, null, CloseLoadingAction>
-> = () => {
-    return async (dispatch: Dispatch) => {
-        dispatch({
-            type: CommonActionTypes.TOGGLE_LOADING_CLOSED,
         });
     };
 };

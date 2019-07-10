@@ -8,7 +8,6 @@ import Header from '../header';
 
 import Dashboard from '../dashboard';
 import TopList from '../topList';
-import CoinList from '../coinList';
 import News from '../news';
 import NotFound from '../notFound';
 
@@ -43,7 +42,6 @@ export class Root extends React.Component<Props> {
                         <Route exact path="/" component={Dashboard} />
                         <Route path="/dashboard" component={Dashboard} />
                         <Route path="/top_coins" component={TopList} />
-                        <Route path="/all_coins" component={CoinList} />
                         <Route path="/news" component={News} />
                         <Route component={NotFound} />
                     </Switch>

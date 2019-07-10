@@ -4,7 +4,6 @@ export interface Theme {
     disabledFontColor: string;
     dropShadow: string;
     dropShadowHover: string;
-    loadingBackground: string;
     mainBackground: string;
     cardBackground: string;
     cardLineColor: string;

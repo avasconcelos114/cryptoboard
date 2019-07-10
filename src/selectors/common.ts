@@ -10,10 +10,6 @@ export const getTheme = (store: Store) => {
     return store.common.theme;
 };
 
-export const getLoadingState = (store: Store) => {
-    return store.common.isLoading;
-};
-
 export const getSidebarState = (store: Store) => {
     return store.common.isSidebarOpen;
 };

@@ -20,16 +20,6 @@ export default function(state: any = initialState, action: any) {
                 ...state,
                 isSidebarOpen: false,
             };
-        case CommonActionTypes.TOGGLE_LOADING_OPEN:
-            return {
-                ...state,
-                isLoading: true,
-            };
-        case CommonActionTypes.TOGGLE_LOADING_CLOSED:
-            return {
-                ...state,
-                isLoading: false,
-            };
         case CommonActionTypes.TOGGLE_THEME:
             return {
                 ...state,

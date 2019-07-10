@@ -1,16 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
 import Zdog from 'zdog';
-import { Theme } from '../../constants/types';
+import { Theme } from '../constants/types';
 
 interface Props {
     isLoading: boolean;
+    id: string;
     theme: Theme;
 }
 
-let illo: any;
-
 export class Loading extends React.Component<Props> {
+    constructor(props: any) {
+        super(props);
+        // @ts-ignore
+        this.illo = '';
+    }
+
     public componentDidMount() {
         this.drawAnimation();
     }
@@ -21,12 +26,15 @@ export class Loading extends React.Component<Props> {
 
     public drawAnimation = () => {
         const zoom = 6;
-        if (document.querySelector('.zdog-canvas') === null) {
+        const { id } = this.props;
+        
+        if (document.querySelector(`.${id}`) === null) {
             return;
         }
 
-        illo = new Zdog.Illustration({
-            element: '.zdog-canvas',
+        // @ts-ignore
+        this.illo = new Zdog.Illustration({
+            element: `.${id}`,
             zoom,
             rotate: { x: -0.4 },
         });
@@ -60,7 +68,8 @@ export class Loading extends React.Component<Props> {
         })();
 
         const gear = new Zdog.Anchor({
-            addTo: illo,
+            // @ts-ignore
+            addTo: this.illo,
             rotate: { x: TAU / 4 },
         });
 
@@ -114,24 +123,23 @@ export class Loading extends React.Component<Props> {
     };
 
     public animate = () => {
-        illo.rotate.y += 0.009;
-        illo.updateRenderGraph();
+        // @ts-ignore
+        this.illo.rotate.y += 0.009;
+        // @ts-ignore
+        this.illo.updateRenderGraph();
         requestAnimationFrame(this.animate);
     };
 
     public render() {
-        const { theme, isLoading } = this.props;
+        const { theme, isLoading, id } = this.props;
         const LoadingContainer = styled.div`
             height: 100%;
             width: 100%;
-            position: absolute;
-            overflow: hidden;
             z-index: 10;
             display: flex;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            background: ${theme.loadingBackground};
         `;
 
         const LoadingCanvas = styled.canvas`
@@ -148,7 +156,7 @@ export class Loading extends React.Component<Props> {
             return (
                 <LoadingContainer>
                     <LoadingCanvas
-                        className="zdog-canvas"
+                        className={id}
                         width="240"
                         height="240"
                     ></LoadingCanvas>
