@@ -70,7 +70,6 @@ export class TopList extends React.Component<Props, State> {
         `;
 
         const CoinContainer = styled.div`
-            margin: 20px 10px 0px 10px;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;

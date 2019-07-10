@@ -26,6 +26,7 @@ export class CoinCard extends React.Component<Props> {
         const Container = styled.div`
             height: 350px;
             margin: 10px;
+            margin-left: ${index % 2 === 0 ? '15px' : '10px'};
             display: flex;
             justify-content: center;
             align-items: center;
@@ -36,7 +37,7 @@ export class CoinCard extends React.Component<Props> {
             `}
 
             ${breakpoint('tablet')`
-                width: calc(50% - 20px);
+                width: calc(50% - 25px);
             `}
         `;
 

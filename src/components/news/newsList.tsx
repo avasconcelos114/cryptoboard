@@ -51,6 +51,7 @@ export class NewsList extends React.Component<Props, State> {
             display: flex;
             justify-content: center;
             align-items: center;
+            margin: 0px 5px;
         `;
 
         const Card = styled.div`
@@ -218,7 +219,6 @@ export class NewsList extends React.Component<Props, State> {
         `;
 
         const NewsContainer = styled.div`
-            margin: 20px 10px 0px 10px;
             display: flex;
             flex-direction: row;
             flex-wrap: wrap;

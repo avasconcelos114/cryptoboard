@@ -49,7 +49,6 @@ docker run -d -p 80:80 --name cryptoboard cryptoboard
 ```
 
 #### TODOs:
-* Refactor loading screen to cover each individual card or feed section
 * Try to fix issue with components re-mounting when theme changes
 * Split dashboard into several chart-based components
 * Find way to virtualize news and top coin as grid (despite their data being list-like)

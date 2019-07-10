@@ -55,7 +55,6 @@ export const themes = {
 export const menuItems = [
     { title: 'Dashboard', route: 'dashboard' },
     { title: 'Top List', route: 'top_coins' },
-    // {title: 'All Coins', route: 'all_coins'},
     { title: 'News', route: 'news' },
 ];
 
