@@ -12,12 +12,8 @@ interface FetchCoinInfoAction {
     type: DashboardActionTypes.FETCH_COIN_INFO;
 }
 
-interface FetchValueTimechartAction {
-    type: DashboardActionTypes.FETCH_VALUE_TIMECHART;
-}
-
-interface FetchVolumeTimechartAction {
-    type: DashboardActionTypes.FETCH_VOLUME_TIMECHART;
+interface FetchTimechartData {
+    type: DashboardActionTypes.FETCH_TIMECHART_DATA;
 }
 
 interface ChangeOptionAction {
@@ -76,8 +72,8 @@ export const fetchCoinInfo: ActionCreator<
     };
 };
 
-export const fetchValueTimechartData: ActionCreator<
-    ThunkAction<Promise<any>, null, null, FetchValueTimechartAction>
+export const fetchTimechartData: ActionCreator<
+    ThunkAction<Promise<any>, null, null, FetchTimechartData>
 > = (symbol: string) => {
     return async (dispatch: Dispatch) => {
         const config = {
@@ -92,33 +88,7 @@ export const fetchValueTimechartData: ActionCreator<
             .get(url, config)
             .then(response => {
                 dispatch({
-                    type: DashboardActionTypes.FETCH_VALUE_TIMECHART,
-                    data: response.data.Data,
-                });
-            })
-            .catch(error => {
-                console.log(error);
-            });
-    };
-};
-
-export const fetchVolumeTimechartData: ActionCreator<
-    ThunkAction<Promise<any>, null, null, FetchVolumeTimechartAction>
-> = (symbol: string) => {
-    return async (dispatch: Dispatch) => {
-        const config = {
-            headers: {
-                authorization: `Bearer ${api.token}`,
-            },
-        };
-
-        let url = `${api.endpoint}/data/histoday?fsym=${symbol}&tsym=USD&limit=5`;
-
-        await axios
-            .get(url, config)
-            .then(response => {
-                dispatch({
-                    type: DashboardActionTypes.FETCH_VOLUME_TIMECHART,
+                    type: DashboardActionTypes.FETCH_TIMECHART_DATA,
                     data: response.data.Data,
                 });
             })

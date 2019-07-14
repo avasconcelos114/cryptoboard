@@ -52,7 +52,7 @@ docker run -d -p 80:80 --name cryptoboard cryptoboard
 * Try to fix issue with components re-mounting when theme changes
 * Split dashboard into several chart-based components
 * Find way to virtualize news and top coin as grid (despite their data being list-like)
-* Create custom types for every prop used
+* Add unit tests
   
 #### Credits  
 <div>

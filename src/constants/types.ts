@@ -29,12 +29,7 @@ export interface News {
 
 // Note: The API source is inconsistent with casing of variables returned
 export interface Coin {
-    CoinInfo: {
-        Id: number;
-        Name: string;
-        FullName: string;
-        ImageUrl: string;
-    };
+    CoinInfo: CoinInfo;
     DISPLAY: {
         USD: {
             PRICE: number;
@@ -44,4 +39,26 @@ export interface Coin {
             LOWDAY: number;
         };
     };
+}
+
+export interface CoinInfo {
+    Id: number;
+    Name: string;
+    FullName: string;
+    ImageUrl: string;
+    USD: {
+        PRICE: string;
+        VOLUME24HOUR: string;
+    }
+}
+
+export interface TimechartData {
+    close: number;
+    high: number;
+    low: number;
+    open: number;
+    time: number;
+    volumefrom: number;
+    volumeto: number;
+    timestamp: string;
 }

@@ -13,15 +13,14 @@ import {
 } from 'recharts';
 import Card from '../card';
 import Loading from '../loading';
-import { Theme } from '../../constants/types';
+import { Theme, CoinInfo, TimechartData } from '../../constants/types';
 
 interface Props {
     theme: Theme;
     selectedOption: string;
-    coinInfo: any;
+    coinInfo: CoinInfo;
     options: any;
-    valueTimechart: any;
-    volumeTimechart: any;
+    timechartData: TimechartData[];
     actions: any;
 }
 
@@ -30,8 +29,7 @@ interface State {
     volumeColor: string;
     isValueLoading: boolean;
     isVolumeLoading: boolean;
-    isValueChartLoading: boolean;
-    isVolumeChartLoading: boolean;
+    isTimechartLoading: boolean;
 }
 
 export class Dashboard extends React.Component<Props, State> {
@@ -42,8 +40,7 @@ export class Dashboard extends React.Component<Props, State> {
             volumeColor: this.generateColor(),
             isValueLoading: false,
             isVolumeLoading: false,
-            isValueChartLoading: false,
-            isVolumeChartLoading: false,
+            isTimechartLoading: false,
         };
     }
 
@@ -53,20 +50,17 @@ export class Dashboard extends React.Component<Props, State> {
             actions: {
                 fetchOptions,
                 fetchCoinInfo,
-                fetchValueTimechartData,
-                fetchVolumeTimechartData,
+                fetchTimechartData,
             },
         } = this.props;
         fetchOptions();
         fetchCoinInfo(selectedOption);
-        fetchValueTimechartData(selectedOption);
-        fetchVolumeTimechartData(selectedOption);
+        fetchTimechartData(selectedOption);
 
         this.setState({
             isValueLoading: true,
             isVolumeLoading: true,
-            isValueChartLoading: true,
-            isVolumeChartLoading: true,
+            isTimechartLoading: true,
         })
     }
 
@@ -76,17 +70,14 @@ export class Dashboard extends React.Component<Props, State> {
             actions: {
                 fetchCoinInfo,
                 coinInfo,
-                valueTimechart,
-                volumeTimechart,
-                fetchValueTimechartData,
-                fetchVolumeTimechartData,
+                timechartData,
+                fetchTimechartData,
             },
         } = this.props;
 
         if (selectedOption !== nextProps.selectedOption) {
             fetchCoinInfo(nextProps.selectedOption);
-            fetchValueTimechartData(nextProps.selectedOption);
-            fetchVolumeTimechartData(nextProps.selectedOption);
+            fetchTimechartData(nextProps.selectedOption);
         }
 
         if (coinInfo !== nextProps.coinInfo) {
@@ -96,15 +87,9 @@ export class Dashboard extends React.Component<Props, State> {
             })
         }
 
-        if (valueTimechart !== nextProps.valueTimechart) {
+        if (timechartData !== nextProps.timechartData) {
             this.setState({
-                isValueChartLoading: false,
-            })
-        }
-
-        if (volumeTimechart !== nextProps.volumeTimechart) {
-            this.setState({
-                isVolumeChartLoading: false,
+                isTimechartLoading: false,
             })
         }
     }
@@ -150,8 +135,7 @@ export class Dashboard extends React.Component<Props, State> {
             selectedOption,
             coinInfo,
             options,
-            valueTimechart,
-            volumeTimechart,
+            timechartData,
         } = this.props;
 
         const Container = styled.div`
@@ -257,23 +241,19 @@ export class Dashboard extends React.Component<Props, State> {
             `}
         `;
         
-        valueTimechart.forEach((data: any) => {
-            data.timestamp = this.timeConverter(data.time);
-        });
-
-        volumeTimechart.forEach((data: any) => {
+        timechartData.forEach((data: any) => {
             data.timestamp = this.timeConverter(data.time);
         });
 
         const optionsElements: any[] = [];
         optionsElements.push(
-            <option value={selectedOption}>{selectedOption}</option>,
+            <option key={selectedOption} value={selectedOption}>{selectedOption}</option>,
         );
 
         options.forEach((option: any) => {
             if (selectedOption !== option.CoinInfo.Name) {
                 optionsElements.push(
-                    <option value={option.CoinInfo.Name}>
+                    <option key={option.CoinInfo.Name} value={option.CoinInfo.Name}>
                         {option.CoinInfo.Name}
                     </option>,
                 );
@@ -318,12 +298,12 @@ export class Dashboard extends React.Component<Props, State> {
                             theme={theme}
                             title={`${selectedOption} - Value Timechart`}
                         >
-                            <div style={{ height: this.state.isValueChartLoading ? 340 : 10 }}>
-                                <Loading theme={theme} id={'value_chart_loading'} isLoading={this.state.isValueChartLoading}/>
+                            <div style={{ height: this.state.isTimechartLoading ? 340 : 10 }}>
+                                <Loading theme={theme} id={'value_chart_loading'} isLoading={this.state.isTimechartLoading}/>
                             </div>
                             <ResponsiveContainer width="100%" height={300}>
                                 <LineChart
-                                    data={valueTimechart}
+                                    data={timechartData}
                                     margin={{
                                         top: 5,
                                         right: 20,
@@ -365,12 +345,12 @@ export class Dashboard extends React.Component<Props, State> {
                             theme={theme}
                             title={`${selectedOption} - Volume Timechart`}
                         >
-                            <div style={{ height: this.state.isVolumeChartLoading ? 340 : 10 }}>
-                                <Loading theme={theme} id={'volume_chart_loading'} isLoading={this.state.isVolumeChartLoading}/>
+                            <div style={{ height: this.state.isTimechartLoading ? 340 : 10 }}>
+                                <Loading theme={theme} id={'volume_chart_loading'} isLoading={this.state.isTimechartLoading}/>
                             </div>
                             <ResponsiveContainer width="100%" height={300}>
                                 <LineChart
-                                    data={volumeTimechart}
+                                    data={timechartData}
                                     margin={{
                                         top: 5,
                                         right: 20,
