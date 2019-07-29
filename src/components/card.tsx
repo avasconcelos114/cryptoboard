@@ -86,6 +86,7 @@ export class Card extends React.Component<Props> {
         if (imageUrl) {
             image = (
                 <Image
+                    id={'card_image'}
                     src={imageUrl}
                 />
             );
@@ -94,7 +95,7 @@ export class Card extends React.Component<Props> {
         return (
             <Card ref={this.cardRef}>
                 <CardHeader>
-                    <h3>{title}</h3>
+                    <h3 id={'card_title'}>{title}</h3>
                     {image}
                 </CardHeader>
                 <CardBody>
