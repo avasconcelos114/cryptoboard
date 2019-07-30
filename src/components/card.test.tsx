@@ -13,15 +13,17 @@ const setup = (props: any) => {
     }
 }
 
+const child = (<p>{'Test child'}</p>)
 const props = {
     theme: constants.themes.light,
     title: 'Test card',
-    children: (<p>{'Test child'}</p>)
+    children: child
 }
 
 describe('Card', () => {
     it('renders without crashing', () => {
-        setup(props)
+        const { component } = setup(props)
+        expect(component).toMatchSnapshot()
     });
     
     it('should render the received title', () => {

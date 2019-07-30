@@ -1,7 +1,8 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import Loading from './loading';
 import constants from '../constants';
+
+import { shallow } from 'enzyme';
 
 const props = {
     theme: constants.themes.light,
@@ -9,20 +10,29 @@ const props = {
     id: 'test_loading_component'
 }
 
-it('renders without crashing', () => {
-    const div = document.createElement('div');
-    ReactDOM.render(<Loading {...props} />, div);
-    ReactDOM.unmountComponentAtNode(div);
-});
+const setup = (props: any) => {
+    const component = shallow(
+        <Loading {...props} />
+    )
+    return {
+        component: component
+    }
+}
 
-it('should return a null component when isLoading is false', () => {
-
-});
-
-it('should render loading component when isLoading is true', () => {
-
-});
-
-it('should render zdog animation', () => {
-
-});
+describe('Loading', () => {
+    it('renders without crashing', () => {
+        const { component } = setup(props)
+        expect(component).toMatchSnapshot()
+    });
+    
+    it('should return a null component when isLoading is false', () => {
+        const {component} = setup(props)
+        expect(component.html()).toBeNull()
+    });
+    
+    it('should render loading component when isLoading is true', () => {
+        const newProps = {...props, isLoading: true}
+        const { component } = setup(newProps)
+        expect(component.html()).not.toBeNull()
+    });
+})
