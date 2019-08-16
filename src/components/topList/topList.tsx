@@ -74,7 +74,8 @@ export class TopList extends React.Component<Props, State> {
             flex-direction: row;
             flex-wrap: wrap;
             height: calc(100% - 90px);
-            overflow: auto;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
         `;
         const coins: any[] = [];
         topList.forEach((coin, index) => {

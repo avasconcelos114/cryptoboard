@@ -176,6 +176,7 @@ export class Dashboard extends React.Component<Props, State> {
         const Dropdown = styled.select`
             margin-left: auto;
             margin-right: 20px;
+            font-size: 16px;
             color: ${theme.mediumFontColor};
             height: 35px;
             width: 100px;
@@ -198,7 +199,8 @@ export class Dashboard extends React.Component<Props, State> {
             flex-direction: row;
             flex-wrap: wrap;
             height: calc(100% - 90px);
-            overflow-y: auto;
+            overflow-y: scroll;
+            -webkit-overflow-scrolling: touch;
             overflow-x: hidden;
             align-content: baseline;
         `;
