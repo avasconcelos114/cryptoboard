@@ -140,6 +140,7 @@ export class Loading extends React.Component<Props> {
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            background-color: ${theme.cardBackground};
         `;
 
         const LoadingCanvas = styled.canvas`

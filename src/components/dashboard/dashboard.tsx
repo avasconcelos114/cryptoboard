@@ -211,14 +211,13 @@ export class Dashboard extends React.Component<Props, State> {
             display: flex;
             justify-content: center;
             align-items: center;
-
             
             ${breakpoint('mobile')`
-            width: 100%;
+                width: 100%;
             `}
             
             ${breakpoint('tablet')`
-            width: calc(50% - 20px);
+                width: calc(50% - 20px);
             `}
 
             .recharts-legend-item-text {
@@ -276,10 +275,14 @@ export class Dashboard extends React.Component<Props, State> {
                             theme={theme}
                             title={`${selectedOption} - Daily Average`}
                         >
-                            <Loading theme={theme} id={'value_loading'} isLoading={this.state.isValueLoading}/>
-                            <ValueTag style={{ color: this.state.priceColor }}>
-                                {coinInfo.USD.PRICE}
-                            </ValueTag>
+                            {
+                                this.state.isValueLoading ?
+                                <Loading theme={theme} id={'value_loading'} isLoading={this.state.isValueLoading}/>
+                                :
+                                <ValueTag style={{ color: this.state.priceColor }}>
+                                    {coinInfo.USD.PRICE}
+                                </ValueTag>
+                            }
                         </Card>
                     </CardContainer>
 
@@ -288,10 +291,14 @@ export class Dashboard extends React.Component<Props, State> {
                             theme={theme}
                             title={`${selectedOption} - Exchange Volume`}
                         >
-                            <Loading theme={theme} id={'volume_loading'} isLoading={this.state.isVolumeLoading}/>
-                            <ValueTag style={{ color: this.state.volumeColor }}>
-                                {coinInfo.USD.VOLUME24HOUR}
-                            </ValueTag>
+                            {
+                                this.state.isVolumeLoading ?
+                                <Loading theme={theme} id={'volume_loading'} isLoading={this.state.isVolumeLoading}/>
+                                :
+                                <ValueTag style={{ color: this.state.volumeColor }}>
+                                    {coinInfo.USD.VOLUME24HOUR}
+                                </ValueTag>
+                            }
                         </Card>
                     </CardContainer>
 
@@ -300,45 +307,47 @@ export class Dashboard extends React.Component<Props, State> {
                             theme={theme}
                             title={`${selectedOption} - Value Timechart`}
                         >
-                            <div style={{ height: this.state.isTimechartLoading ? 340 : 10 }}>
-                                <Loading theme={theme} id={'value_chart_loading'} isLoading={this.state.isTimechartLoading}/>
-                            </div>
-                            <ResponsiveContainer width="100%" height={300}>
-                                <LineChart
-                                    data={timechartData}
-                                    margin={{
-                                        top: 5,
-                                        right: 20,
-                                        bottom: 5,
-                                        left: 0,
-                                    }}
-                                >
-                                    <Line
-                                        type="monotone"
-                                        dataKey="high"
-                                        stroke="#9C27B0"
-                                        activeDot={{ r: 8 }}
-                                    />
-                                    <Line
-                                        type="monotone"
-                                        dataKey="open"
-                                        stroke="#26C6DA"
-                                    />
-                                    <Line
-                                        type="monotone"
-                                        dataKey="low"
-                                        stroke="#26A69A"
-                                    />
-                                    <CartesianGrid
-                                        stroke={theme.mediumFontColor}
-                                        strokeDasharray="5 5"
-                                    />
-                                    <Tooltip />
-                                    <Legend />
-                                    <XAxis dataKey="timestamp" />
-                                    <YAxis />
-                                </LineChart>
-                            </ResponsiveContainer>
+                            {
+                                this.state.isValueLoading ?
+                                <Loading theme={theme} id={'value_timechart_loading'} isLoading={this.state.isValueLoading}/>
+                                :
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <LineChart
+                                        data={timechartData}
+                                        margin={{
+                                            top: 5,
+                                            right: 20,
+                                            bottom: 5,
+                                            left: 0,
+                                        }}
+                                    >
+                                        <Line
+                                            type="monotone"
+                                            dataKey="high"
+                                            stroke="#9C27B0"
+                                            activeDot={{ r: 8 }}
+                                        />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="open"
+                                            stroke="#26C6DA"
+                                        />
+                                        <Line
+                                            type="monotone"
+                                            dataKey="low"
+                                            stroke="#26A69A"
+                                        />
+                                        <CartesianGrid
+                                            stroke={theme.mediumFontColor}
+                                            strokeDasharray="5 5"
+                                        />
+                                        <Tooltip />
+                                        <Legend />
+                                        <XAxis dataKey="timestamp" />
+                                        <YAxis />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            }
                         </Card>
                     </CardContainer>
 
@@ -347,35 +356,39 @@ export class Dashboard extends React.Component<Props, State> {
                             theme={theme}
                             title={`${selectedOption} - Volume Timechart`}
                         >
-                            <div style={{ height: this.state.isTimechartLoading ? 340 : 10 }}>
-                                <Loading theme={theme} id={'volume_chart_loading'} isLoading={this.state.isTimechartLoading}/>
-                            </div>
-                            <ResponsiveContainer width="100%" height={300}>
-                                <LineChart
-                                    data={timechartData}
-                                    margin={{
-                                        top: 5,
-                                        right: 20,
-                                        bottom: 5,
-                                        left: 0,
-                                    }}
-                                >
-                                    <Line
-                                        type="monotone"
-                                        dataKey="volumefrom"
-                                        stroke="#26C6DA"
-                                        activeDot={{ r: 8 }}
-                                    />
-                                    <CartesianGrid
-                                        stroke={theme.mediumFontColor}
-                                        strokeDasharray="5 5"
-                                    />
-                                    <Tooltip />
-                                    <Legend />
-                                    <XAxis dataKey="timestamp" />
-                                    <YAxis />
-                                </LineChart>
-                            </ResponsiveContainer>
+                            {
+                                this.state.isVolumeLoading ?
+                                <div style={{height: this.state.isVolumeLoading ? 340 : 0}}>
+                                    <Loading theme={theme} id={'volume_timechart_loading'} isLoading={this.state.isVolumeLoading}/>
+                                </div>
+                                :
+                                <ResponsiveContainer width="100%" height={300}>
+                                    <LineChart
+                                        data={timechartData}
+                                        margin={{
+                                            top: 5,
+                                            right: 20,
+                                            bottom: 5,
+                                            left: 0,
+                                        }}
+                                    >
+                                        <Line
+                                            type="monotone"
+                                            dataKey="volumefrom"
+                                            stroke="#26C6DA"
+                                            activeDot={{ r: 8 }}
+                                        />
+                                        <CartesianGrid
+                                            stroke={theme.mediumFontColor}
+                                            strokeDasharray="5 5"
+                                        />
+                                        <Tooltip />
+                                        <Legend />
+                                        <XAxis dataKey="timestamp" />
+                                        <YAxis />
+                                    </LineChart>
+                                </ResponsiveContainer>
+                            }
                         </Card>
                     </CardContainer>
                 </DashboardContents>
